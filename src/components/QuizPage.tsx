@@ -41,11 +41,25 @@ export function QuizPage(): JSX.Element {
         <p className="mt-2 text-slate-300">{question.scenario.description}</p>
 
         {imageUrl ? (
-          <img
-            className="mt-5 max-h-[340px] w-full rounded-xl border border-slate-800 object-cover"
-            src={imageUrl}
-            alt={`Illustration: ${question.title}`}
-          />
+          <div className="relative mt-5">
+            <img
+              className="max-h-[340px] w-full rounded-xl border border-slate-800 bg-slate-950 object-contain"
+              src={imageUrl}
+              alt={`Illustration: ${question.title}`}
+            />
+            {selected && question.indicators.length > 0 && (
+              <div className="absolute inset-x-3 bottom-3 rounded-lg border border-slate-300/20 bg-slate-950/70 p-3 backdrop-blur-sm md:inset-x-4 md:bottom-4">
+                <p className="text-xs font-semibold uppercase tracking-wide text-cyan-200">
+                  Indices à repérer
+                </p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-xs text-slate-100 md:text-sm">
+                  {question.indicators.map((indicator) => (
+                    <li key={indicator}>{indicator}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         ) : (
           <div className="mt-5 rounded-xl border border-dashed border-slate-700 bg-slate-950/40 p-6 text-sm text-slate-400">
             Illustration indisponible pour cette question.
