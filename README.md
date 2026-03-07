@@ -43,4 +43,3 @@ Email, SMS, WhatsApp, appels téléphoniques, QR codes, courriers
    - Illustrations générées par IA pour chaque question
 2. **Phase suivante : implémentation de l'application**
    - Stack à définir
-# quiz-anti-scam

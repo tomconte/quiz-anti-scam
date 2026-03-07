@@ -1,0 +1,376 @@
+{
+  "metadata": {
+    "version": "1.0-addendum",
+    "created": "2026-03-05",
+    "description": "10 questions additionnelles : 7 légitimes + 3 suspectes/ambiguës, à consolider avec scam-quiz-database.json",
+    "id_range": "21-30",
+    "verdict_distribution": {
+      "legitime": {"count": 7, "ids": [21, 22, 23, 24, 25, 26, 27]},
+      "suspect": {"count": 3, "ids": [28, 29, 30]}
+    }
+  },
+
+  "questions": [
+    {
+      "id": 21,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 1,
+      "title": "Vrai SMS Chronopost — notification de livraison",
+      "scenario": {
+        "description": "Vous attendez un colis commandé hier sur Amazon. Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "38004",
+          "message": "Chronopost : Votre colis 2X8849302FR est en cours de livraison aujourd'hui. Suivez-le sur l'application Chronopost ou sur chronopost.fr"
+        }
+      },
+      "question": "Ce SMS est-il légitime ?",
+      "options": [
+        {"id": "A", "text": "Oui, c'est un vrai SMS Chronopost", "is_correct": true},
+        {"id": "B", "text": "Non, c'est forcément du phishing", "is_correct": false},
+        {"id": "C", "text": "Impossible à dire sans cliquer sur le lien", "is_correct": false}
+      ],
+      "correct_answer": "A",
+      "legitimacy_markers": [
+        "Numéro court professionnel (38004) — pas un 06/07 mobile",
+        "Le SMS ne contient AUCUN lien cliquable — il vous invite à aller vous-même sur chronopost.fr ou l'app",
+        "Numéro de suivi fourni, vérifiable indépendamment",
+        "Aucune demande de paiement ou de données personnelles",
+        "Cohérence avec une commande réelle que vous attendez"
+      ],
+      "explanation": "C'est un vrai SMS de Chronopost. Les indices clés : le numéro court 38004 (les escrocs utilisent des 06/07), l'absence de lien direct (Chronopost vous renvoie vers l'app ou le site officiel sans lien cliquable), et surtout aucune demande de paiement. Le numéro de suivi peut être vérifié de manière indépendante. Comparez avec la question 1 : le faux SMS venait d'un 07, contenait un lien vers un domaine frauduleux et demandait 1,99€. La différence se joue sur ces détails structurels, pas sur le logo ou la mise en forme.",
+      "key_lesson": "Un vrai SMS de livraison ne demande jamais de payer et ne contient généralement pas de lien cliquable — il vous oriente vers le site officiel ou l'application.",
+      "source_context": "Format confirmé des notifications Chronopost officielles."
+    },
+
+    {
+      "id": 22,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 3,
+      "title": "Vrai email Ameli — notification de remboursement",
+      "scenario": {
+        "description": "Vous avez consulté votre médecin la semaine dernière. Vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@assurance-maladie.fr",
+          "subject": "Votre remboursement Assurance Maladie",
+          "body": "Bonjour M. DUPONT Thomas,\n\nUn nouveau remboursement de soins a été effectué sur votre compte.\n\nPour consulter le détail de vos remboursements, connectez-vous à votre compte ameli.\n\nL'Assurance Maladie\n\nCeci est un message automatique. Merci de ne pas y répondre."
+        }
+      },
+      "question": "Cet email est-il authentique ?",
+      "options": [
+        {"id": "A", "text": "Non, l'Assurance Maladie n'envoie jamais d'emails", "is_correct": false},
+        {"id": "B", "text": "Oui, c'est une vraie notification Ameli", "is_correct": true},
+        {"id": "C", "text": "C'est suspect car il ne précise pas le montant", "is_correct": false}
+      ],
+      "correct_answer": "B",
+      "legitimacy_markers": [
+        "Le domaine @assurance-maladie.fr est le domaine officiel vérifié",
+        "Le message est nominatif (M. DUPONT Thomas)",
+        "Aucun lien direct dans le corps du mail — il dit 'connectez-vous à votre compte ameli' sans fournir de lien",
+        "Aucune demande de données personnelles ou bancaires",
+        "Le montant n'est PAS indiqué dans l'email (contrairement aux faux qui mettent un montant précis pour appâter)",
+        "Cohérence avec une consultation récente réelle"
+      ],
+      "explanation": "C'est un vrai email de l'Assurance Maladie. Paradoxalement, le fait de NE PAS préciser le montant est un signe de légitimité : les vrais emails Ameli vous informent qu'un remboursement a été effectué et vous invitent à consulter le détail sur votre compte, sans donner le montant dans l'email. Les faux, eux, affichent un montant précis (ex: 287,40€) pour vous motiver à cliquer. Autres indices : le domaine @assurance-maladie.fr est correct, le message est nominatif, et il n'y a pas de lien cliquable.",
+      "key_lesson": "Les vrais emails d'organismes officiels sont souvent plus sobres que les faux : pas de montant affiché, pas de lien direct, pas d'urgence. C'est le contraire de ce qu'on attend intuitivement.",
+      "source_context": "Format confirmé par ameli.fr — domaines officiels d'envoi : @assurance-maladie.fr et @info.ameli.fr."
+    },
+
+    {
+      "id": 23,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 12,
+      "title": "Vraie alerte fraude bancaire par SMS",
+      "scenario": {
+        "description": "Vous recevez ce SMS de votre banque :",
+        "simulated_content": {
+          "sender": "BNP Paribas",
+          "message": "BNP Paribas — Alerte sécurité : un paiement de 180,00 EUR chez AMAZON EU a été détecté. Si vous êtes à l'origine de ce paiement, aucune action n'est requise. Dans le cas contraire, connectez-vous à votre application Mes Comptes BNP Paribas."
+        }
+      },
+      "question": "Ce SMS est-il une vraie alerte de votre banque ?",
+      "options": [
+        {"id": "A", "text": "Non, les banques n'envoient jamais de SMS", "is_correct": false},
+        {"id": "B", "text": "Non, car le nom d'expéditeur peut être usurpé", "is_correct": false},
+        {"id": "C", "text": "Oui, les indices structurels correspondent à une vraie alerte bancaire", "is_correct": true}
+      ],
+      "correct_answer": "C",
+      "legitimacy_markers": [
+        "Le message ne contient AUCUN lien cliquable",
+        "Il ne demande AUCUNE action immédiate — 'aucune action requise' si c'est vous",
+        "Il vous dirige vers VOTRE application (pas un site web via lien)",
+        "Il mentionne un commerçant identifiable (Amazon EU) et un montant rond",
+        "Il n'y a aucune menace, aucune urgence artificielle",
+        "Pas de demande de données personnelles ou bancaires"
+      ],
+      "explanation": "C'est une vraie alerte bancaire. La différence cruciale avec le faux SMS bancaire (question 12) : ici, AUCUN lien n'est fourni. Le message vous informe et vous redirige vers votre propre application. Il ne crée pas de panique ('aucune action requise') et ne demande rien. Le faux, lui, contenait un lien d'annulation (le piège) et jouait sur l'urgence. Attention : le nom d'expéditeur PEUT être usurpé (option B), mais l'ensemble des autres indices structurels confirme la légitimité. Dans le doute, le bon réflexe reste d'ouvrir l'app bancaire soi-même.",
+      "key_lesson": "Une vraie alerte bancaire INFORME sans DEMANDER. Elle ne contient ni lien, ni formulaire, ni demande de rappel. Elle vous renvoie vers vos propres outils (app, site officiel).",
+      "source_context": "Format type des alertes SMS bancaires conformes aux recommandations de la Fédération Bancaire Française."
+    },
+
+    {
+      "id": 24,
+      "type": "scenario_visuel",
+      "category": "impots",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 7,
+      "title": "Vrai email des impôts — ouverture de la déclaration",
+      "scenario": {
+        "description": "Mi-avril, vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@dgfip.finances.gouv.fr",
+          "subject": "Ouverture de la déclaration de revenus 2025",
+          "body": "Bonjour,\n\nLe service de déclaration en ligne des revenus 2025 est ouvert depuis le 10 avril 2026.\n\nVous pouvez déclarer vos revenus en vous connectant à votre espace particulier sur impots.gouv.fr\n\nLa date limite de déclaration en ligne pour votre département est le 22 mai 2026.\n\nCordialement,\nLa Direction générale des Finances publiques"
+        }
+      },
+      "question": "Cet email est-il authentique ?",
+      "options": [
+        {"id": "A", "text": "Non, la DGFiP ne contacte jamais par email", "is_correct": false},
+        {"id": "B", "text": "Oui, c'est un vrai rappel de la DGFiP", "is_correct": true},
+        {"id": "C", "text": "C'est suspect car il n'y a pas de numéro fiscal dans l'email", "is_correct": false}
+      ],
+      "correct_answer": "B",
+      "legitimacy_markers": [
+        "Le domaine @dgfip.finances.gouv.fr est le domaine officiel (terminaison .gouv.fr)",
+        "Le message est informatif — il ne demande RIEN (pas de lien, pas de formulaire, pas de paiement)",
+        "Il mentionne une date limite départementale précise et réaliste",
+        "Il vous invite à vous connecter VOUS-MÊME sur impots.gouv.fr sans fournir de lien",
+        "Aucune mention de remboursement, d'urgence ou de pénalité",
+        "L'absence de numéro fiscal est NORMALE — la DGFiP ne met jamais d'informations sensibles dans un email"
+      ],
+      "explanation": "C'est un vrai email de la DGFiP. La Direction générale des Finances publiques envoie bien des emails d'information, notamment pour annoncer l'ouverture de la campagne déclarative. La clé : le domaine est en .gouv.fr (comparez avec le faux de la question 7 dont le vrai domaine était @mailer-service.fr), le message ne contient aucun lien cliquable, ne demande rien, et ne promet pas d'argent. L'option C est un piège : l'absence de numéro fiscal est justement une bonne pratique de sécurité de la DGFiP.",
+      "key_lesson": "La DGFiP envoie bien des emails, mais uniquement informatifs, depuis un domaine .gouv.fr, sans lien cliquable et sans données personnelles. Tout email DGFiP contenant un lien, un formulaire ou une demande de paiement est frauduleux.",
+      "source_context": "Page officielle impots.gouv.fr sur les communications légitimes de la DGFiP."
+    },
+
+    {
+      "id": 25,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "email",
+      "difficulty": "debutant",
+      "verdict": "legitime",
+      "pairs_with": 18,
+      "title": "Vrai email Amazon — confirmation d'expédition",
+      "scenario": {
+        "description": "Vous avez commandé un livre sur Amazon hier. Vous recevez cet email :",
+        "simulated_content": {
+          "from": "envoi-confirme@amazon.fr",
+          "subject": "Votre commande Amazon n°402-8847291-6639501 a été expédiée",
+          "body": "Bonjour Thomas,\n\nVotre commande a été expédiée.\n\nArticle : \"Cybersécurité pour les Nuls\" × 1\nLivreur : Amazon Logistics\nDate de livraison estimée : jeudi 7 mars 2026\n\nSuivez votre colis :\nhttps://www.amazon.fr/gp/your-account/order-details?orderID=402-8847291-6639501\n\nMerci pour votre achat !\nAmazon.fr"
+        }
+      },
+      "question": "Cet email est-il légitime ?",
+      "options": [
+        {"id": "A", "text": "Non, il contient un lien — c'est suspect", "is_correct": false},
+        {"id": "B", "text": "Oui, tous les indices convergent vers un email Amazon authentique", "is_correct": true},
+        {"id": "C", "text": "Impossible à dire sans analyser les en-têtes techniques", "is_correct": false}
+      ],
+      "correct_answer": "B",
+      "legitimacy_markers": [
+        "Le domaine @amazon.fr est le domaine officiel",
+        "Le lien pointe vers www.amazon.fr (domaine officiel) avec un chemin cohérent",
+        "Le message est personnalisé : prénom, numéro de commande réel, article commandé",
+        "Cohérence totale avec une commande que vous avez réellement passée hier",
+        "Aucune demande de paiement supplémentaire ni de données personnelles",
+        "Le numéro de commande correspond au format Amazon standard"
+      ],
+      "explanation": "C'est un vrai email Amazon. Attention : contrairement aux organismes publics (impôts, Ameli), les entreprises privées comme Amazon incluent bien des liens dans leurs emails légitimes. La présence d'un lien n'est donc PAS automatiquement suspecte. Ce qui compte : le domaine du lien (www.amazon.fr, pas amazon-suivi.com), la personnalisation détaillée (article exact, numéro de commande vérifiable), et la cohérence avec votre activité réelle. Le piège pédagogique ici : ne pas tomber dans l'excès inverse en rejetant tout email contenant un lien.",
+      "key_lesson": "La présence d'un lien dans un email n'est pas automatiquement un signe de fraude. Vérifiez le DOMAINE du lien, la cohérence avec vos actions récentes, et la personnalisation du message.",
+      "source_context": "Format standard des emails transactionnels Amazon.fr."
+    },
+
+    {
+      "id": 26,
+      "type": "scenario_visuel",
+      "category": "caf_prestations",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "legitime",
+      "pairs_with": 9,
+      "title": "Vrai SMS de la CAF — rappel de déclaration trimestrielle",
+      "scenario": {
+        "description": "Vous êtes allocataire de la CAF. En début de trimestre, vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "CAF",
+          "message": "CAF : Pensez à déclarer vos ressources trimestrielles avant le 25 mars sur caf.fr ou l'appli Caf - Mon Compte. Sans déclaration, vos aides pourraient être suspendues."
+        }
+      },
+      "question": "Ce SMS est-il authentique ?",
+      "options": [
+        {"id": "A", "text": "Non, la CAF ne menace jamais de suspendre les aides", "is_correct": false},
+        {"id": "B", "text": "Oui, c'est un vrai rappel de la CAF", "is_correct": true},
+        {"id": "C", "text": "C'est suspect car il n'y a pas de numéro d'allocataire", "is_correct": false}
+      ],
+      "correct_answer": "B",
+      "legitimacy_markers": [
+        "Expéditeur 'CAF' en nom court (pas un 06/07)",
+        "Pas de lien cliquable — il vous oriente vers caf.fr ou l'application par leur nom",
+        "La mention de suspension est FACTUELLE (la CAF suspend effectivement en l'absence de déclaration trimestrielle)",
+        "Aucune demande de données bancaires ou personnelles",
+        "L'absence de numéro d'allocataire est normale — la CAF ne met pas de données personnelles dans un SMS",
+        "Timing cohérent : début de trimestre"
+      ],
+      "explanation": "C'est un vrai SMS de la CAF. Piège subtil : la mention de suspension des aides peut sembler menaçante et ressembler à une technique de scam. Mais ici, c'est une information factuelle — la CAF suspend effectivement les versements si la déclaration trimestrielle n'est pas faite. La différence avec le faux email CAF (question 9) : ici, pas de lien, pas de montant précis mirobolant, pas de demande de coordonnées bancaires, et le SMS vous renvoie vers le site officiel par son nom. Le faux promettait une prime de 385,20€ et demandait de 'confirmer' des coordonnées bancaires.",
+      "key_lesson": "Un message peut être légitime même s'il mentionne une conséquence négative (suspension d'aides). Ce qui distingue un vrai rappel d'un scam : pas de lien direct, pas de demande de données, et une action vérifiable sur le site officiel.",
+      "source_context": "La CAF envoie bien des SMS de rappel pour les déclarations trimestrielles de ressources."
+    },
+
+    {
+      "id": 27,
+      "type": "scenario_visuel",
+      "category": "telecom",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 20,
+      "title": "Vraie facture Orange par email",
+      "scenario": {
+        "description": "Le 5 du mois, comme d'habitude, vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@contact.orange.fr",
+          "subject": "Votre facture Orange du 05/03/2026 — 29,99 €",
+          "body": "Bonjour Thomas DUPONT,\n\nVotre facture n° FA26030587421 du 05/03/2026 est disponible.\nMontant : 29,99 €\nLigne concernée : 06 XX XX XX 42\n\nRetrouvez le détail de votre facture dans votre Espace Client sur orange.fr ou dans l'application Orange et Moi.\n\nSi vous êtes en prélèvement automatique, aucune action n'est requise.\n\nOrange — Service Client"
+        }
+      },
+      "question": "Cet email de facture Orange est-il authentique ?",
+      "options": [
+        {"id": "A", "text": "Non, le montant est trop précis pour être vrai", "is_correct": false},
+        {"id": "B", "text": "C'est suspect — il faut vérifier le lien avant de cliquer", "is_correct": false},
+        {"id": "C", "text": "Oui, c'est une vraie notification de facture Orange", "is_correct": true}
+      ],
+      "correct_answer": "C",
+      "legitimacy_markers": [
+        "Le domaine @contact.orange.fr est un sous-domaine légitime d'orange.fr",
+        "Le message est nominatif (nom complet + numéro de ligne partiel)",
+        "Le montant (29,99€) est cohérent avec un forfait classique et votre historique",
+        "Le numéro de facture est fourni et vérifiable",
+        "Pas de lien cliquable dans le corps — renvoi vers l'Espace Client et l'app",
+        "Mention du prélèvement automatique et 'aucune action requise'",
+        "Date d'envoi cohérente avec le cycle de facturation habituel (le 5 du mois)"
+      ],
+      "explanation": "C'est une vraie facture Orange. Comparez avec le faux (question 20) : celui-ci venait de @orange-service-client.net (domaine non-officiel), affichait un montant anormalement élevé (247,83€) pour créer la panique, menaçait d'un prélèvement sous 72h, et contenait un bouton 'Contester'. Ici, tout est cohérent : domaine officiel, montant normal, personnalisation complète, aucune urgence, et renvoi vers les canaux officiels sans lien direct.",
+      "key_lesson": "Comparez toujours avec vos factures habituelles : même expéditeur, même format, montant cohérent, même date dans le mois. Un changement soudain dans l'un de ces éléments est un signal d'alerte.",
+      "source_context": "Format standard des notifications de facture Orange confirmé via orange.fr."
+    },
+
+    {
+      "id": 28,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "sms",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "pairs_with": null,
+      "title": "SMS de livraison avec numéro inhabituel",
+      "scenario": {
+        "description": "Vous attendez un colis Vinted. Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "+33 7 80 09 44 12",
+          "message": "Mondial Relay : votre colis MR-4829174 est disponible au Point Relais Tabac Presse du Centre, 14 rue de la République. Retrait avant le 12/03. Munissez-vous de votre pièce d'identité."
+        }
+      },
+      "question": "Vous attendez bien un colis Vinted via Mondial Relay. Que faites-vous ?",
+      "options": [
+        {"id": "A", "text": "Le numéro en 07 est suspect — c'est forcément un scam", "is_correct": false},
+        {"id": "B", "text": "C'est sûr, les détails correspondent à mon colis", "is_correct": false},
+        {"id": "C", "text": "Le contenu semble cohérent mais le numéro d'envoi est inhabituel — je vérifie sur l'app Vinted ou mondial relay avant de me déplacer", "is_correct": true}
+      ],
+      "correct_answer": "C",
+      "ambiguity_factors": [
+        "Le numéro en 07 est atypique pour Mondial Relay (normalement un numéro court), MAIS certains sous-traitants de livraison utilisent parfois des numéros mobiles",
+        "Le contenu est cohérent : numéro de colis, adresse du point relais, demande de pièce d'identité (normal pour Mondial Relay)",
+        "Pas de lien, pas de demande de paiement — ce qui plaide pour la légitimité",
+        "Mais l'adresse du point relais et le numéro de colis pourraient être inventés"
+      ],
+      "explanation": "Ce message est ambiguë et illustre une situation réelle fréquente. Le contenu ne présente aucun signal d'arnaque classique (pas de lien, pas de paiement), mais le numéro d'expédition en 07 est inhabituel. Dans ce cas, la bonne réaction n'est ni de rejeter par principe, ni de faire confiance aveuglément, mais de vérifier par un canal indépendant : l'app Vinted affiche le suivi et le point relais, le site mondialrelay.fr permet de vérifier le numéro de colis. C'est le réflexe universel à ancrer.",
+      "key_lesson": "Quand un message est ambigu, la réponse n'est jamais 'cliquer pour vérifier' mais 'vérifier par un autre canal'. Ouvrez l'application d'origine (Vinted, Amazon, etc.) pour confirmer les informations.",
+      "source_context": "Cas réel : certains transporteurs sous-traitent les notifications SMS à des prestataires qui utilisent des numéros mobiles."
+    },
+
+    {
+      "id": 29,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "email",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "pairs_with": null,
+      "title": "Email de mutuelle avec pièce jointe PDF",
+      "scenario": {
+        "description": "Vous recevez cet email de votre mutuelle :",
+        "simulated_content": {
+          "from": "espace-adherent@harmonie-mutuelle.fr",
+          "subject": "Votre relevé de prestations — Février 2026",
+          "body": "Bonjour M. Dupont,\n\nVeuillez trouver ci-joint votre relevé de prestations du mois de février 2026.\n\nPour toute question, connectez-vous à votre espace adhérent sur harmonie-mutuelle.fr ou appelez le 3233.\n\nCordialement,\nHarmonie Mutuelle\n\nPièce jointe : Releve_Prestations_022026.pdf"
+        }
+      },
+      "question": "Le domaine semble correct et vous êtes bien chez Harmonie Mutuelle. Que faites-vous ?",
+      "options": [
+        {"id": "A", "text": "J'ouvre la pièce jointe — tout semble en ordre", "is_correct": false},
+        {"id": "B", "text": "Je ne l'ouvre pas et je vérifie d'abord si le même document est disponible dans mon espace adhérent en ligne", "is_correct": true},
+        {"id": "C", "text": "C'est un scam — les mutuelles n'envoient jamais de pièces jointes", "is_correct": false}
+      ],
+      "correct_answer": "B",
+      "ambiguity_factors": [
+        "Le domaine @harmonie-mutuelle.fr SEMBLE correct (mais pourrait être usurpé via spoofing d'en-tête)",
+        "Le format est professionnel et cohérent avec les communications habituelles",
+        "Les mutuelles envoient effectivement des relevés par email avec PDF — ce n'est PAS intrinsèquement suspect",
+        "MAIS les PDF peuvent contenir des liens de phishing ou du code malveillant",
+        "MAIS l'adresse d'expédition affichée peut être falsifiée sans que le domaine réel soit celui affiché"
+      ],
+      "explanation": "Ce message est probablement légitime, mais la prudence s'impose avec les pièces jointes, même quand tout semble correct. L'adresse d'expédition affichée peut être falsifiée (le 'From' visible n'est pas le vrai domaine d'envoi). Et les PDF peuvent contenir des liens de phishing — ce vecteur est en forte hausse depuis 2025. Le bon réflexe : avant d'ouvrir la pièce jointe, connectez-vous à votre espace adhérent en ligne. Si le relevé y est disponible, consultez-le depuis là-bas. C'est une hygiène de sécurité, pas de la paranoïa.",
+      "key_lesson": "Même un email apparemment légitime avec pièce jointe mérite une vérification croisée. Les relevés et documents sont presque toujours disponibles dans votre espace client en ligne — préférez toujours cette voie.",
+      "source_context": "Augmentation des PDF contenant des liens de phishing documentée par les rapports de sécurité 2025."
+    },
+
+    {
+      "id": 30,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "appel",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "pairs_with": 6,
+      "title": "Appel de votre banque suite à un achat à l'étranger",
+      "scenario": {
+        "description": "Vous venez de payer un hôtel en Espagne sur Booking.com avec votre carte bancaire. 10 minutes plus tard, votre téléphone sonne :",
+        "simulated_content": {
+          "caller_display": "Numéro masqué",
+          "transcript": "Bonjour Monsieur Dupont, ici le service des opérations internationales du Crédit Agricole. Nous vous contactons car nous avons détecté un paiement de 340€ auprès d'un hôtel en Espagne qui sort de votre profil d'utilisation habituel. Pouvez-vous confirmer que vous êtes à l'origine de ce paiement ? Nous voulons simplement nous en assurer avant de le valider."
+        }
+      },
+      "question": "L'appel correspond exactement à l'achat que vous venez de faire. Que répondez-vous ?",
+      "options": [
+        {"id": "A", "text": "Je confirme le paiement, c'est cohérent et ça me rassure", "is_correct": false},
+        {"id": "B", "text": "C'est un scam évident — je raccroche immédiatement", "is_correct": false},
+        {"id": "C", "text": "Je ne confirme ni n'infirme. Je dis que je vais rappeler ma banque moi-même pour confirmer.", "is_correct": true}
+      ],
+      "correct_answer": "C",
+      "ambiguity_factors": [
+        "La coïncidence temporelle est TRÈS convaincante — 10 min après un vrai paiement",
+        "Les banques appellent effectivement pour des paiements inhabituels à l'étranger",
+        "MAIS le numéro est masqué — impossible de vérifier l'origine",
+        "MAIS un escroc ayant intercepté la transaction (skimming, fuite côté marchand) pourrait connaître le montant et le timing",
+        "L'appel ne demande QUE confirmation (pas de code, pas de validation) — ce qui ressemble à un vrai appel",
+        "MAIS confirmer donne à un éventuel escroc l'info qu'il s'agit bien du titulaire de la carte"
+      ],
+      "explanation": "Ce cas est le plus subtil du quiz. Il est POSSIBLE que ce soit un vrai appel de votre banque — elles font effectivement ce type de vérification. Mais il est IMPOSSIBLE de le certifier au téléphone, surtout depuis un numéro masqué. La coïncidence temporelle ne prouve rien : en cas de compromission des données de paiement côté marchand, l'escroc connaît le montant et le timing exact. La seule réponse sûre : 'Je vais raccrocher et rappeler le Crédit Agricole moi-même.' Un vrai conseiller comprendra parfaitement cette prudence — et si ce n'en était pas un, vous venez d'éviter une arnaque.",
+      "key_lesson": "Le réflexe 'je raccroche et je rappelle moi-même' est TOUJOURS la bonne réponse pour un appel entrant, même quand tout semble cohérent. Un vrai conseiller ne sera jamais offensé par cette prudence.",
+      "source_context": "Recommandation universelle de la Fédération Bancaire Française et de Cybermalveillance.gouv.fr."
+    }
+  ]
+}

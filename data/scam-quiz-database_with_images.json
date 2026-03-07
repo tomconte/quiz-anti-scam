@@ -1,0 +1,1502 @@
+{
+  "metadata": {
+    "version": "2.0",
+    "created": "2026-03-05",
+    "updated": "2026-03-06",
+    "language": "fr",
+    "country": "FR",
+    "total_questions": 30,
+    "schema": {
+      "verdict_values": [
+        "arnaque",
+        "legitime",
+        "suspect",
+        null
+      ],
+      "indicators_field": "unified field (replaces red_flags / legitimacy_markers / ambiguity_factors)"
+    },
+    "verdict_distribution": {
+      "arnaque": 14,
+      "null": 6,
+      "legitime": 7,
+      "suspect": 3
+    },
+    "categories": [
+      "banque",
+      "livraison_colis",
+      "impots",
+      "assurance_maladie",
+      "amendes",
+      "whatsapp_sms",
+      "caf_prestations",
+      "cpf_formation",
+      "telecom",
+      "theorie_generale"
+    ],
+    "channels": [
+      "email",
+      "sms",
+      "whatsapp",
+      "appel",
+      "qr_code",
+      "courrier"
+    ],
+    "difficulty_levels": [
+      "debutant",
+      "intermediaire",
+      "avance"
+    ],
+    "question_types": [
+      "scenario_visuel",
+      "theorie",
+      "vrai_ou_faux",
+      "indice_a_reperer"
+    ]
+  },
+  "questions": [
+    {
+      "id": 1,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "arnaque",
+      "title": "SMS de livraison Chronopost",
+      "scenario": {
+        "description": "Vous recevez le SMS suivant sur votre téléphone :",
+        "simulated_content": {
+          "sender": "+33 7 68 42 19 03",
+          "message": "CHRONOPOST: Votre colis ne rentrait pas dans la boîte aux lettres. Frais d'affranchissement insuffisants (1,99€). Reprogrammez ici : https://chronopost-relivraison.info/suivi"
+        }
+      },
+      "question": "Ce SMS est-il légitime ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, Chronopost envoie ce type de SMS",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non, c'est une tentative de phishing",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Peut-être, il faut cliquer pour vérifier",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le numéro expéditeur est un 07 mobile, pas un numéro court professionnel",
+        "L'URL 'chronopost-relivraison.info' n'est pas le domaine officiel chronopost.fr",
+        "Demande de paiement de 1,99€ — montant faible pour inciter à payer sans réfléchir",
+        "Chronopost ne demande jamais de frais supplémentaires par SMS"
+      ],
+      "explanation": "C'est l'une des arnaques les plus répandues en France. Les escrocs exploitent le fait que beaucoup de gens attendent un colis. Le montant très faible (1,99€) est calculé pour passer sous le seuil de vigilance. Le vrai but est de récupérer vos coordonnées bancaires sur le faux site. Un vrai SMS Chronopost vient d'un numéro court (ex: 38004) et renvoie toujours vers chronopost.fr.",
+      "risks": [
+        "Vol de coordonnées bancaires",
+        "Prélèvements frauduleux récurrents",
+        "Revente de vos données personnelles"
+      ],
+      "official_verification": "Vérifiez le suivi de votre colis directement sur chronopost.fr ou via l'app Chronopost",
+      "source_context": "Les arnaques au faux colis représentent l'un des scénarios de smishing les plus fréquents en France en 2025-2026, exploitant les habitudes d'achat en ligne."
+    },
+    {
+      "id": 2,
+      "type": "scenario_visuel",
+      "category": "impots",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "arnaque",
+      "title": "SMS d'amende impayée",
+      "scenario": {
+        "description": "Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "AMENDES.GOUV",
+          "message": "AMENDES.GOUV : Veuillez noter que vous avez une amende de stationnement impayée. Pour éviter toute majoration, régularisez votre situation le plus rapidement possible en utilisant le lien ci-dessous : https://amendes-gouv.sbs/paiement"
+        }
+      },
+      "question": "Ce SMS provient-il réellement de l'administration ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, le nom affiché est AMENDES.GOUV",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non, la DGFiP n'envoie jamais de SMS pour un défaut de paiement",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "C'est suspect mais possible",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "La DGFiP n'envoie JAMAIS de SMS pour réclamer un paiement d'amende",
+        "L'URL 'amendes-gouv.sbs' n'est pas un domaine .gouv.fr — c'est une extension exotique (.sbs)",
+        "Le nom d'expéditeur peut être falsifié (spoofing) : ce n'est pas une preuve d'authenticité",
+        "Le ton d'urgence ('pour éviter toute majoration') est un levier psychologique classique"
+      ],
+      "explanation": "L'État français ne communique les amendes que par courrier postal. Le seul site de paiement légitime est amendes.gouv.fr (domaine en .gouv.fr). Les fraudes aux amendes/péages ont connu une hausse de plus de 900% en 2025. Le nom affiché comme expéditeur d'un SMS peut être librement choisi par les escrocs, c'est ce qu'on appelle le spoofing d'identifiant.",
+      "risks": [
+        "Vol de coordonnées bancaires",
+        "Prélèvements frauduleux",
+        "Vol d'identité via les informations saisies"
+      ],
+      "official_verification": "Consultez amendes.gouv.fr directement dans votre navigateur, ou appelez le centre des Finances publiques",
+      "source_context": "Alerte officielle impots.gouv.fr confirmant que la DGFiP ne réclame jamais de paiement par SMS."
+    },
+    {
+      "id": 3,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "Email de renouvellement carte Vitale",
+      "scenario": {
+        "description": "Vous recevez cet email avec le logo Ameli et la charte graphique verte habituelle :",
+        "simulated_content": {
+          "from": "service-renouvellement@ameli-assurance.com",
+          "subject": "Votre carte Vitale arrive prochainement à expiration",
+          "body": "Bonjour,\n\nNous vous informons que votre carte Vitale arrive prochainement à expiration. Pour garantir la continuité de vos remboursements et bénéficier du tiers payant chez votre médecin ou pharmacien, une mise à jour est nécessaire.\n\nVeuillez compléter le formulaire ci-dessous pour recevoir votre nouvelle carte :\n[Mettre à jour mes informations]\n\nFrais d'envoi : 0,95€\n\nCordialement,\nService Assurance Maladie"
+        }
+      },
+      "question": "Quels sont les indices qui révèlent cette arnaque ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "L'adresse email n'est pas en @assurance-maladie.fr, et la carte Vitale n'expire jamais",
+          "is_correct": true
+        },
+        {
+          "id": "B",
+          "text": "Seul le montant de 0,95€ est suspect, le reste semble authentique",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "L'email semble légitime, le logo et la mise en page sont corrects",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "A",
+      "indicators": [
+        "L'adresse @ameli-assurance.com n'est pas le domaine officiel (les vrais mails viennent de @assurance-maladie.fr)",
+        "La carte Vitale n'a PAS de date d'expiration — c'est le piège principal",
+        "L'Assurance Maladie ne demande JAMAIS de paiement pour la carte Vitale (elle est gratuite)",
+        "Le formulaire en ligne demandant des informations personnelles/bancaires est le mécanisme de vol"
+      ],
+      "explanation": "Depuis début 2026, plus de 200 signalements de cette campagne ont été recensés par Cybermalveillance.gouv.fr. Cette arnaque exploite les fuites de données massives de Viamedis/Almerys (février 2024, 33 millions de personnes touchées) qui permettent aux escrocs de personnaliser leurs messages. Rappel essentiel : la carte Vitale ne périme pas et sa création/envoi sont toujours gratuits.",
+      "risks": [
+        "Vol de coordonnées bancaires",
+        "Arnaque en cascade : après le phishing mail, un faux conseiller bancaire peut appeler",
+        "Usurpation d'identité via le numéro de Sécurité sociale",
+        "Accès frauduleux à FranceConnect via les identifiants Ameli"
+      ],
+      "official_verification": "Connectez-vous directement sur ameli.fr ou appelez le 3646",
+      "source_context": "Campagne de phishing majeure début 2026 signalée par l'Assurance Maladie, amplifiée par les fuites Viamedis/Almerys."
+    },
+    {
+      "id": 4,
+      "type": "scenario_visuel",
+      "category": "whatsapp_sms",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "arnaque",
+      "title": "L'arnaque 'Coucou Maman'",
+      "scenario": {
+        "description": "Vous recevez ce SMS d'un numéro inconnu :",
+        "simulated_content": {
+          "sender": "+33 7 52 83 41 67",
+          "message": "Coucou maman, c'est moi. J'ai eu un problème avec mon téléphone, c'est mon numéro temporaire. Envoie moi un message sur WhatsApp sur ce numéro le plus rapidement possible ! Je ne pourrai plus te répondre ici."
+        }
+      },
+      "question": "Votre fille vous a effectivement dit hier qu'elle avait des soucis avec son téléphone. Que faites-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "J'envoie un message WhatsApp à ce nouveau numéro, c'est cohérent",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "J'appelle ma fille sur son numéro habituel pour vérifier",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Je réponds au SMS pour demander plus de détails",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le message est impersonnel — il ne contient aucun détail que seul votre enfant connaîtrait",
+        "Redirection vers WhatsApp : permet aux escrocs de gérer plusieurs arnaques simultanément",
+        "Ton d'urgence : 'le plus rapidement possible', 'je ne pourrai plus te répondre'",
+        "Ce SMS est envoyé en masse à des milliers de numéros trouvés via des fuites de données"
+      ],
+      "explanation": "L'arnaque 'Coucou maman/papa' exploite l'instinct parental. Les montants extorqués atteignent en moyenne 5 000€, parfois plus de 10 000€. Même si la coïncidence avec un vrai problème de téléphone semble troublante, le réflexe ABSOLU est de contacter votre enfant par son numéro habituel ou un autre canal connu (appel, email, autre proche). Ne jamais envoyer d'argent sans avoir formellement identifié l'interlocuteur par un moyen indépendant.",
+      "risks": [
+        "Demande de virement bancaire (moyenne : 5 000€)",
+        "Demande de codes PCS / Transcash / Neosurf intraçables",
+        "Vol de coordonnées de carte bancaire",
+        "Installation de malware si clic sur un lien WhatsApp"
+      ],
+      "official_verification": "Appelez votre enfant sur son numéro habituel. Signalez au 33700 et sur Pharos.",
+      "source_context": "Arnaque massive documentée par Cybermalveillance.gouv.fr, avec forte recrudescence depuis 2023."
+    },
+    {
+      "id": 5,
+      "type": "theorie",
+      "category": "theorie_generale",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "title": "L'IA et le phishing en 2025-2026",
+      "scenario": {
+        "description": "Question théorique sur l'évolution des techniques de phishing."
+      },
+      "question": "Pourquoi les fautes d'orthographe ne sont-elles plus un indicateur fiable pour détecter un email de phishing en 2026 ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Les escrocs utilisent désormais l'IA générative pour produire des messages parfaitement rédigés et personnalisés",
+          "is_correct": true
+        },
+        {
+          "id": "B",
+          "text": "Les filtres anti-spam corrigent automatiquement les fautes",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Les escrocs suivent maintenant des formations en français",
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "Les fautes n'ont jamais été un bon indicateur",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "A",
+      "indicators": [],
+      "explanation": "L'IA générative (ChatGPT, etc.) a révolutionné le phishing. Les emails générés par IA sont sans faute, dans un ton professionnel adapté à chaque cible, et même multilingues. Selon Microsoft, les emails de phishing générés par IA obtiennent un taux de clic de 54%, contre seulement 12% pour les messages rédigés manuellement. En 2026, on estime que 80% des attaques de phishing utilisent l'IA. Il faut donc se concentrer sur d'autres indices : adresse d'expédition, URL des liens, contexte de la demande.",
+      "risks": [
+        "Baisse de vigilance face à des messages bien écrits",
+        "Phishing ultra-personnalisé exploitant les données des réseaux sociaux",
+        "Deepfakes vocaux utilisés en complément"
+      ],
+      "official_verification": "",
+      "source_context": "Rapport Microsoft MDDR 2025, rapport Kaspersky Spam & Phishing 2025."
+    },
+    {
+      "id": 6,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "appel",
+      "difficulty": "avance",
+      "verdict": "arnaque",
+      "title": "Appel du faux conseiller bancaire",
+      "scenario": {
+        "description": "Votre téléphone sonne. L'écran affiche le numéro officiel de votre banque (ex: 01 42 XX XX XX — Société Générale). Un homme se présente :",
+        "simulated_content": {
+          "caller_display": "01 42 14 XX XX — Société Générale",
+          "transcript": "Bonjour Madame Dupont, ici Marc Lefèvre du service fraudes de la Société Générale. Nous avons détecté deux paiements suspects sur votre carte se terminant par 4821 : un achat de 489€ sur Amazon Allemagne et un virement de 1 200€ vers un compte inconnu. Pour bloquer immédiatement ces opérations, j'ai besoin que vous validiez une notification sur votre application bancaire. C'est la procédure de sécurité standard."
+        }
+      },
+      "question": "Le numéro affiché est bien celui de votre banque et la personne connaît les 4 derniers chiffres de votre carte. Que faites-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Je valide la notification pour bloquer les opérations suspectes",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Je raccroche et rappelle ma banque moi-même au numéro figurant sur ma carte",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Je demande plus de détails pour vérifier que c'est bien ma banque",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le spoofing téléphonique permet d'afficher n'importe quel numéro — même celui de votre banque",
+        "Un VRAI conseiller ne demande JAMAIS de valider une opération par téléphone",
+        "Les 4 derniers chiffres de votre carte proviennent probablement d'une fuite de données antérieure",
+        "L'urgence ('bloquer immédiatement') est un levier de manipulation",
+        "La 'notification à valider' sert en réalité à AUTORISER un paiement frauduleux, pas à le bloquer"
+      ],
+      "explanation": "L'arnaque au faux conseiller bancaire est l'une des plus sophistiquées. Grâce au spoofing, les escrocs font apparaître le vrai numéro de votre banque sur votre écran. Les données personnelles (nom, derniers chiffres de carte) proviennent souvent de fuites massives (Viamedis, Service-public.fr en janvier 2026, etc.). La notification que vous validez sur votre app bancaire n'annule PAS une opération : elle en AUTORISE une nouvelle. La seule règle : toujours raccrocher et rappeler soi-même sa banque.",
+      "risks": [
+        "Validation de paiements frauduleux pouvant atteindre plusieurs milliers d'euros",
+        "Votre banque peut invoquer votre 'négligence grave' pour refuser le remboursement",
+        "Les fonds sont transférés en quelques secondes et souvent irrécupérables"
+      ],
+      "official_verification": "Raccrochez. Rappeler le numéro de votre banque figurant sur votre carte ou contrat.",
+      "source_context": "Loi française sur le spoofing : depuis octobre 2024, les opérateurs doivent authentifier les numéros pour lutter contre l'usurpation."
+    },
+    {
+      "id": 7,
+      "type": "scenario_visuel",
+      "category": "impots",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "Email de remboursement d'impôts",
+      "scenario": {
+        "description": "Vous recevez cet email en mai, peu après la période de déclaration :",
+        "simulated_content": {
+          "from": "ne_pas_repondre.dgfip.finances.gouv.fr@mailer-service.fr",
+          "subject": "Notification de remboursement — Trop-perçu fiscal 2025",
+          "body": "Direction générale des Finances publiques\n\nSuite au traitement de votre déclaration de revenus 2025, nous avons constaté un trop-perçu de 287,40€ en votre faveur.\n\nPour recevoir votre remboursement, veuillez mettre à jour vos coordonnées bancaires via le formulaire sécurisé ci-dessous dans un délai de 48h.\n\n[Accéder au formulaire de remboursement]\n\nService des Impôts des Particuliers"
+        }
+      },
+      "question": "Identifiez le principal indice technique qui prouve que cet email est frauduleux :",
+      "options": [
+        {
+          "id": "A",
+          "text": "Le montant de 287,40€ est trop précis pour être faux",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "L'adresse email : le domaine réel après le @ est 'mailer-service.fr', pas un domaine .gouv.fr",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "La DGFiP n'envoie jamais d'emails",
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "Le délai de 48h est normal pour une procédure fiscale",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "L'adresse d'expédition : tout ce qui est avant le @ peut être falsifié. Seul le domaine APRÈS le @ compte. Ici c'est @mailer-service.fr (frauduleux)",
+        "La DGFiP utilise UNIQUEMENT des domaines en .gouv.fr (ex: @dgfip.finances.gouv.fr)",
+        "La DGFiP ne demande jamais de coordonnées bancaires par email — les remboursements passent par l'espace personnel sur impots.gouv.fr",
+        "Le délai de 48h crée une fausse urgence"
+      ],
+      "explanation": "L'adresse d'expédition est le piège le plus subtil : les escrocs placent des mots rassurants AVANT le @, mais c'est le domaine APRÈS le @ qui identifie réellement l'expéditeur. Ici, 'ne_pas_repondre.dgfip.finances.gouv.fr' est juste le nom d'affichage, le vrai domaine est '@mailer-service.fr'. La DGFiP a confirmé officiellement : tout email envoyé depuis un autre domaine que .gouv.fr est frauduleux. Les vrais remboursements sont traités automatiquement via votre espace impots.gouv.fr.",
+      "risks": [
+        "Vol de coordonnées bancaires (RIB/IBAN)",
+        "Vol d'identifiants fiscaux (numéro fiscal, mot de passe)",
+        "Attaque en cascade : phishing suivi d'un appel de faux conseiller"
+      ],
+      "official_verification": "Connectez-vous directement sur impots.gouv.fr (tapez l'adresse manuellement). Toute communication fiscale légitime est visible dans votre espace personnel.",
+      "source_context": "Alerte officielle DGFiP impots.gouv.fr : exemples d'adresses frauduleuses recensées."
+    },
+    {
+      "id": 8,
+      "type": "vrai_ou_faux",
+      "category": "theorie_generale",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "title": "Le cadenas HTTPS est-il une garantie ?",
+      "scenario": {
+        "description": "Affirmation à évaluer."
+      },
+      "question": "VRAI ou FAUX : Si un site web affiche un cadenas vert (HTTPS) dans la barre d'adresse, cela signifie qu'il est sûr et légitime.",
+      "options": [
+        {
+          "id": "A",
+          "text": "VRAI — le cadenas garantit que le site est fiable",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "FAUX — le cadenas ne signifie que le chiffrement de la connexion, pas la légitimité du site",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [],
+      "explanation": "En 2026, n'importe qui peut obtenir un certificat HTTPS gratuit en quelques secondes (via Let's Encrypt par exemple). Le cadenas signifie uniquement que la communication entre vous et le site est chiffrée — mais le site lui-même peut être frauduleux. Autrement dit, vos données seront transmises de manière chiffrée… directement aux escrocs. Ce qui compte, c'est le NOM DE DOMAINE dans la barre d'adresse : vérifiez que c'est bien le domaine officiel (ex: impots.gouv.fr et non impots-gouv.sbs).",
+      "risks": [
+        "Fausse confiance menant à saisir des données sensibles",
+        "99% des sites de phishing utilisent désormais HTTPS"
+      ],
+      "official_verification": "",
+      "source_context": "Tendance confirmée par les rapports APWG 2024-2025."
+    },
+    {
+      "id": 9,
+      "type": "scenario_visuel",
+      "category": "caf_prestations",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "Email de la CAF — Prime exceptionnelle",
+      "scenario": {
+        "description": "Vous recevez cet email :",
+        "simulated_content": {
+          "from": "versement-prime@caf-allocations.org",
+          "subject": "CAF — Prime exceptionnelle de pouvoir d'achat : vos droits",
+          "body": "Cher(e) allocataire,\n\nSuite aux mesures gouvernementales de soutien au pouvoir d'achat, vous êtes éligible à une prime exceptionnelle de 385,20€.\n\nPour en bénéficier, confirmez vos coordonnées bancaires avant le 15 mars :\n[Confirmer mes coordonnées]\n\nVotre CAF"
+        }
+      },
+      "question": "Ce message est-il authentique ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, le gouvernement verse régulièrement des primes",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non — le domaine n'est pas caf.fr, et la CAF ne demande jamais de coordonnées bancaires par email",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Probablement oui si je suis allocataire de la CAF",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine @caf-allocations.org n'est pas le domaine officiel caf.fr",
+        "La CAF verse les primes automatiquement sur le RIB déjà enregistré, sans demande de confirmation",
+        "Montant précis (385,20€) conçu pour paraître crédible",
+        "Deadline (15 mars) pour créer l'urgence"
+      ],
+      "explanation": "Les primes de la CAF sont versées automatiquement aux bénéficiaires éligibles sans aucune démarche de leur part. La CAF possède déjà votre RIB. Tout email demandant de 'confirmer' vos coordonnées bancaires est une arnaque. En cas de doute, connectez-vous directement à votre espace caf.fr. Les escrocs surfent sur l'actualité des aides sociales pour crédibiliser leurs messages.",
+      "risks": [
+        "Vol de données bancaires (RIB, numéro de carte)",
+        "Vol d'identifiants CAF ouvrant accès aux données personnelles",
+        "Usurpation d'identité"
+      ],
+      "official_verification": "Consultez caf.fr ou l'application mobile Caf. Appelez le 3230.",
+      "source_context": "Alertes récurrentes de Cybermalveillance.gouv.fr sur les faux messages CAF."
+    },
+    {
+      "id": 10,
+      "type": "scenario_visuel",
+      "category": "cpf_formation",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "arnaque",
+      "title": "SMS d'expiration du CPF",
+      "scenario": {
+        "description": "Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "+33 6 91 24 58 03",
+          "message": "DERNIER RAPPEL : Vos droits CPF (Compte Personnel de Formation) vont expirer le 31/03. Vous disposez de 2 840€ non utilisés. Pour ne pas perdre ces droits, inscrivez-vous : https://mon-compte-formation.info/activation"
+        }
+      },
+      "question": "Vos droits CPF vont-ils réellement expirer ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, le CPF a une date limite d'utilisation",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non, les droits CPF ne périment pas et le démarchage commercial CPF est interdit",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Peut-être, il faut vérifier sur le site indiqué",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Les droits CPF NE PÉRIMENT PAS — c'est un mensonge pur et simple",
+        "Le démarchage commercial pour le CPF est INTERDIT par la loi depuis 2023",
+        "L'URL 'mon-compte-formation.info' n'est pas le site officiel moncompteformation.gouv.fr (typosquatting : .info au lieu de .gouv.fr)",
+        "Le numéro en 06 est un mobile personnel, pas un organisme officiel"
+      ],
+      "explanation": "Depuis l'interdiction du démarchage téléphonique CPF, les escrocs se sont rabattus massivement sur le SMS. L'objectif est de voler vos identifiants FranceConnect pour siphonner votre cagnotte de formation via des organismes fictifs. Les droits CPF sont acquis à vie tant que vous êtes actif. Le SEUL site officiel est moncompteformation.gouv.fr.",
+      "risks": [
+        "Vol de la cagnotte CPF (souvent plusieurs milliers d'euros)",
+        "Compromission de vos identifiants FranceConnect (accès impôts, CAF, Ameli…)",
+        "Inscription à des formations fantômes facturées à votre insu"
+      ],
+      "official_verification": "Connectez-vous directement sur moncompteformation.gouv.fr",
+      "source_context": "Vagues massives de smishing CPF documentées par Cybermalveillance.gouv.fr."
+    },
+    {
+      "id": 11,
+      "type": "theorie",
+      "category": "theorie_generale",
+      "channel": "sms",
+      "difficulty": "avance",
+      "title": "Le typosquatting",
+      "scenario": {
+        "description": "Question sur les techniques de tromperie par URL."
+      },
+      "question": "Parmi ces URLs, laquelle est le site officiel des impôts ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "https://impots-gouv.fr/mon-espace",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "https://www.impots.gouv.fr/mon-espace",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "https://impots.gouv.fr.paiement-secure.com/mon-espace",
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "https://www.lmpots.gouv.fr/mon-espace",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "A : 'impots-gouv.fr' — le tiret change tout : ce n'est PAS un sous-domaine de gouv.fr",
+        "C : 'impots.gouv.fr.paiement-secure.com' — le vrai domaine est paiement-secure.com (tout ce qui précède est un sous-domaine trompeur)",
+        "D : 'lmpots' avec un L minuscule au lieu du I — quasi invisible dans certaines polices"
+      ],
+      "explanation": "Le typosquatting exploite la ressemblance visuelle entre caractères (l/I, rn/m, 0/O) ou ajoute des tirets/sous-domaines pour créer des URLs trompeuses. La règle d'or : le VRAI domaine est toujours juste avant la première barre oblique '/'. Dans l'option C, 'impots.gouv.fr' n'est qu'un sous-domaine du vrai domaine 'paiement-secure.com'. C'est la technique la plus trompeuse car elle inclut littéralement l'URL officielle dans l'adresse frauduleuse.",
+      "risks": [
+        "Saisie de données sensibles sur un site cloné",
+        "Installation de malware",
+        "Vol d'identifiants et de coordonnées bancaires"
+      ],
+      "official_verification": "Toujours taper l'adresse manuellement dans le navigateur ou utiliser ses favoris",
+      "source_context": "Technique de typosquatting documentée par l'ANSSI et les rapports APWG."
+    },
+    {
+      "id": 12,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "SMS de validation bancaire suspect",
+      "scenario": {
+        "description": "Vous recevez ce SMS alors que vous n'avez fait aucun achat :",
+        "simulated_content": {
+          "sender": "BNP PARIBAS",
+          "message": "BNP : Un paiement de 892,50€ a été initié depuis votre compte. Si vous n'êtes pas à l'origine de cette opération, annulez immédiatement ici : https://bnp-paribas-securite.eu/annulation"
+        }
+      },
+      "question": "Que devez-vous faire ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Cliquer sur le lien pour annuler l'opération au plus vite",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Ignorer le SMS et vérifier directement dans l'application BNP ou appeler la banque",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Répondre 'STOP' au SMS pour signaler la fraude",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "L'URL 'bnp-paribas-securite.eu' n'est pas le domaine officiel mabanque.bnpparibas (extension .eu suspecte)",
+        "Le nom d'expéditeur 'BNP PARIBAS' peut être usurpé par spoofing",
+        "Le lien d'annulation sert en réalité à valider une opération frauduleuse",
+        "La peur de perdre 892,50€ pousse à agir sans réfléchir"
+      ],
+      "explanation": "Les banques françaises n'envoient JAMAIS de lien d'annulation par SMS. Si une opération suspecte est détectée, votre banque bloque d'abord la carte, puis vous contacte. Le lien dans le SMS conduit vers un faux site qui collecte vos identifiants bancaires et/ou vous fait valider une opération frauduleuse. Le seul réflexe : ouvrir votre application bancaire directement (pas via le lien) ou appeler le numéro figurant au dos de votre carte.",
+      "risks": [
+        "Validation involontaire d'un paiement frauduleux",
+        "Vol des identifiants de banque en ligne",
+        "Vidage du compte courant"
+      ],
+      "official_verification": "Ouvrez l'application officielle de votre banque ou appelez le numéro au dos de votre carte",
+      "source_context": "Alerte Fédération Bancaire Française sur les arnaques par SMS usurpant l'identité des banques."
+    },
+    {
+      "id": 13,
+      "type": "scenario_visuel",
+      "category": "amendes",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "SMS de péage impayé",
+      "scenario": {
+        "description": "Vous avez emprunté l'autoroute il y a quelques jours. Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "+33 6 77 29 58 41",
+          "message": "VINCI Autoroutes : Un péage de 14,80€ est resté impayé sur votre trajet du 28/02. Réglez sous 48h pour éviter une majoration de 375€. Paiement : https://vinci-peage-regulation.com/p/289742"
+        }
+      },
+      "question": "Vous avez bien pris l'autoroute ce jour-là. Ce SMS est-il fiable ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, le montant et la date correspondent à mon trajet",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non — Vinci ne contacte pas par SMS mobile et l'URL n'est pas officielle",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Possible, les péages impayés sont fréquents",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Numéro en 06 : ce n'est pas un numéro court professionnel",
+        "L'URL 'vinci-peage-regulation.com' n'est pas le domaine officiel vfrfr.com (VINCI) ou autoroutes.fr",
+        "Menace de majoration à 375€ pour créer la panique",
+        "Les fraudes aux péages ont explosé de +900% en 2025"
+      ],
+      "explanation": "Les fraudes imitant les sociétés d'autoroutes ont connu une hausse spectaculaire en 2025. Les escrocs envoient des SMS très ciblés, parfois avec des montants plausibles. En réalité, les impayés de péage font l'objet d'un courrier recommandé, jamais d'un SMS. Le site officiel de VINCI pour les péages est vfrfr.com. La coïncidence entre votre trajet et le message est due au hasard (envoi massif) ou à des données de géolocalisation/habitudes de consommation issues de fuites.",
+      "risks": [
+        "Vol de coordonnées bancaires",
+        "Prélèvements frauduleux récurrents",
+        "Transmission de données personnelles"
+      ],
+      "official_verification": "Contactez directement le service client de votre société d'autoroute via son site officiel",
+      "source_context": "Hausse de +900% des fraudes aux péages en 2025 documentée par Cybermalveillance.gouv.fr."
+    },
+    {
+      "id": 14,
+      "type": "theorie",
+      "category": "theorie_generale",
+      "channel": "qr_code",
+      "difficulty": "avance",
+      "title": "Le Quishing (phishing par QR code)",
+      "scenario": {
+        "description": "Question sur une technique émergente."
+      },
+      "question": "Qu'est-ce que le 'quishing' et pourquoi est-il particulièrement dangereux ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Un phishing par QR code qui contourne les filtres de sécurité email car le lien malveillant est encodé dans une image",
+          "is_correct": true
+        },
+        {
+          "id": "B",
+          "text": "Un virus qui se propage par les applications de quiz en ligne",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Une arnaque spécifique aux paiements sans contact",
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "Un type de spam vocal automatisé",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "A",
+      "indicators": [],
+      "explanation": "Le quishing (QR code + phishing) a augmenté de 400% entre 2023 et 2025. Les attaquants placent des QR codes malveillants dans des emails, des flyers, des faux PV de stationnement, ou même en collant un autocollant par-dessus un vrai QR code (restaurants, bornes de parking...). Comme le lien est encodé dans une image, les filtres anti-spam classiques ne peuvent pas le détecter. De plus, le QR code ouvre directement le navigateur du smartphone, où il est plus difficile de vérifier l'URL complète sur un petit écran.",
+      "risks": [
+        "Redirection vers un site de phishing invisible pour les filtres",
+        "Difficulté à vérifier l'URL sur mobile (écran petit)",
+        "QR codes physiques collés sur de vrais supports (parkings, restaurants)"
+      ],
+      "official_verification": "Utilisez un lecteur QR qui prévisualise l'URL avant d'ouvrir le lien",
+      "source_context": "Rapport Abnormal Security : hausse de 400% du quishing entre 2023 et 2025."
+    },
+    {
+      "id": 15,
+      "type": "scenario_visuel",
+      "category": "whatsapp_sms",
+      "channel": "whatsapp",
+      "difficulty": "avance",
+      "verdict": "arnaque",
+      "title": "Message WhatsApp d'un 'ami' — Telegram Premium",
+      "scenario": {
+        "description": "Vous recevez ce message WhatsApp d'un ami dont le compte est vérifié dans vos contacts :",
+        "simulated_content": {
+          "sender": "Laurent M. (contact connu)",
+          "message": "Salut ! J'ai un cadeau pour toi 🎁 Un abonnement Telegram Premium gratuit de 3 mois ! C'est une promo officielle. Clique ici pour l'activer avec ton compte : https://telegram-premium-gift.link/activate\n\nFaut le faire avant ce soir, y'en a plus beaucoup !"
+        }
+      },
+      "question": "Votre ami Laurent vous envoie ce message. Comment réagissez-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "J'active le cadeau — c'est un ami de confiance",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Je contacte Laurent par un autre moyen pour vérifier s'il a vraiment envoyé ce message",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Le lien semble officiel, je clique",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le compte de votre ami a probablement été piraté — d'où l'envoi depuis son vrai numéro",
+        "L'URL 'telegram-premium-gift.link' n'est pas le domaine officiel telegram.org",
+        "Urgence artificielle : 'avant ce soir', 'y'en a plus beaucoup'",
+        "Les cadeaux Telegram Premium sont un appât classique documenté par Kaspersky",
+        "Le lien demande de se connecter à un compte → vol d'identifiants"
+      ],
+      "explanation": "Les faux cadeaux Telegram Premium sont l'un des stratagèmes de phishing les plus répandus, documentés par Kaspersky dans son rapport 2025. Les messages sont envoyés depuis des comptes piratés d'amis réels, ce qui les rend très crédibles. En cliquant et en vous 'connectant', vous donnez vos identifiants aux attaquants, qui piratent votre compte à leur tour pour propager l'arnaque. Cette technique s'est étendue à de nombreuses langues en 2025.",
+      "risks": [
+        "Piratage de votre compte Telegram/WhatsApp",
+        "Propagation de l'arnaque à tous vos contacts",
+        "Vol de données personnelles contenues dans vos conversations"
+      ],
+      "official_verification": "Contactez votre ami par un autre canal (appel, SMS, en personne). Les vrais cadeaux Telegram se gèrent dans l'app officielle.",
+      "source_context": "Rapport Kaspersky Spam & Phishing 2025 : expansion multilingue des arnaques Telegram Premium."
+    },
+    {
+      "id": 16,
+      "type": "vrai_ou_faux",
+      "category": "theorie_generale",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "title": "Cliquer sans remplir : sans risque ?",
+      "scenario": {
+        "description": "Affirmation à évaluer."
+      },
+      "question": "VRAI ou FAUX : Cliquer sur un lien de phishing par SMS n'est pas dangereux tant qu'on ne remplit aucun formulaire sur la page.",
+      "options": [
+        {
+          "id": "A",
+          "text": "VRAI — sans saisie de données, il n'y a aucun risque",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "FAUX — le simple clic peut confirmer votre numéro actif et, dans certains cas, déclencher l'installation d'un malware",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [],
+      "explanation": "Même sans remplir de formulaire, cliquer sur un lien de phishing comporte des risques réels. Premièrement, le clic confirme aux escrocs que votre numéro de téléphone est actif et que vous êtes réceptif — vous recevrez davantage de spam et de tentatives. Deuxièmement, sur Android en particulier, certaines pages peuvent tenter d'installer un logiciel malveillant (drive-by download). Troisièmement, des scripts sur la page peuvent collecter des informations sur votre appareil (fingerprinting). Le réflexe : ne jamais cliquer, même par curiosité.",
+      "risks": [
+        "Confirmation que votre numéro est actif → plus de spam",
+        "Tentative d'installation de malware (surtout Android)",
+        "Collecte d'empreinte numérique de votre appareil",
+        "Redirection vers d'autres sites malveillants en chaîne"
+      ],
+      "official_verification": "",
+      "source_context": "Recommandations Cybermalveillance.gouv.fr et ANSSI."
+    },
+    {
+      "id": 17,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "courrier",
+      "difficulty": "avance",
+      "verdict": "arnaque",
+      "title": "Courrier papier avec QR code — Carte Vitale",
+      "scenario": {
+        "description": "Vous recevez un courrier non nominatif dans une enveloppe blanche, avec le logo de l'Assurance Maladie :",
+        "simulated_content": {
+          "format": "Courrier papier",
+          "content": "ASSURANCE MALADIE\n\nMadame, Monsieur,\n\nVotre carte Vitale nécessite une mise à jour urgente. Scannez le QR code ci-dessous avec votre smartphone pour procéder à la mise à jour de vos informations.\n\n[QR CODE]\n\nCette démarche est obligatoire pour maintenir vos droits à jour.\n\nL'Assurance Maladie"
+        }
+      },
+      "question": "Ce courrier papier est-il légitime ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, un courrier papier est forcément officiel",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non — l'Assurance Maladie ne procède pas à des mises à jour par QR code dans un courrier non nominatif",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Peut-être, il faut scanner le QR code pour vérifier",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Courrier NON NOMINATIF (pas de nom, prénom, numéro de Sécurité sociale) — les vrais courriers Ameli sont toujours personnalisés",
+        "Enveloppe blanche banale — les courriers officiels Ameli ont un format reconnaissable",
+        "QR code menant vers un site inconnu — technique de quishing",
+        "L'Assurance Maladie confirme ne JAMAIS envoyer de QR code pour une mise à jour urgente"
+      ],
+      "explanation": "Le phishing ne se limite plus au digital ! En 2025-2026, des courriers papier frauduleux avec QR codes circulent en France. L'Assurance Maladie a confirmé qu'un courrier non nominatif dans une enveloppe blanche avec un QR code ne provient PAS de leurs services. La mise à jour de la carte Vitale se fait gratuitement en pharmacie ou sur une borne dédiée, jamais via un QR code reçu par courrier.",
+      "risks": [
+        "Redirection vers un site de phishing via le QR code",
+        "Vol de données personnelles et bancaires",
+        "Le support papier crée une fausse confiance"
+      ],
+      "official_verification": "Appelez le 3646 ou consultez ameli.fr. La mise à jour Vitale se fait en pharmacie.",
+      "source_context": "Alerte ameli.fr sur les courriers frauduleux avec QR code."
+    },
+    {
+      "id": 18,
+      "type": "indice_a_reperer",
+      "category": "livraison_colis",
+      "channel": "email",
+      "difficulty": "avance",
+      "verdict": "arnaque",
+      "title": "Email La Poste — Pièce jointe suspecte",
+      "scenario": {
+        "description": "Vous recevez cet email avec une pièce jointe :",
+        "simulated_content": {
+          "from": "notification-laposte@suivi-colis-express.com",
+          "subject": "Avis de passage — Votre colis est en attente",
+          "body": "Bonjour,\n\nNotre livreur s'est présenté à votre domicile mais vous étiez absent(e). Veuillez trouver ci-joint l'étiquette de retrait à présenter en bureau de poste.\n\nPièce jointe : Etiquette_retrait_LP2026031.pdf.svg\n\nCordialement,\nLa Poste — Service Colissimo",
+          "attachment": "Etiquette_retrait_LP2026031.pdf.svg"
+        }
+      },
+      "question": "Combien d'indices suspects pouvez-vous identifier ? Quel est le plus dangereux ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "L'adresse email suspecte est le seul problème",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "La pièce jointe '.pdf.svg' est le danger principal : c'est un fichier SVG déguisé en PDF qui peut contenir du JavaScript malveillant",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "L'email semble normal, La Poste envoie ce type de notification",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Double extension '.pdf.svg' : le vrai format est SVG (dernière extension), pas PDF. Technique de camouflage classique",
+        "Les fichiers SVG peuvent contenir du JavaScript exécutable — vecteur d'attaque en forte hausse depuis 2025",
+        "Le domaine 'suivi-colis-express.com' n'est pas laposte.fr",
+        "La Poste envoie les avis de passage en format papier dans la boîte aux lettres, pas par email avec pièce jointe"
+      ],
+      "explanation": "Les fichiers .svg avec JavaScript embarqué et les .pdf contenant des liens de phishing sont deux vecteurs en forte augmentation depuis 2025. La double extension (.pdf.svg) trompe l'utilisateur : Windows/Mac affiche parfois seulement '.pdf' en masquant la vraie extension. Le fichier SVG s'ouvre dans le navigateur et peut exécuter du code malveillant. Règle d'or : ne jamais ouvrir une pièce jointe inattendue, surtout avec une double extension.",
+      "risks": [
+        "Exécution de JavaScript malveillant dans le navigateur",
+        "Installation de malware / ransomware",
+        "Vol de session et d'identifiants stockés dans le navigateur"
+      ],
+      "official_verification": "Vérifiez sur laposte.fr avec votre numéro de suivi. Les avis de passage sont en papier.",
+      "source_context": "Alerte captaindns.com : fichiers .svg et .pdf malveillants en forte hausse depuis 2025."
+    },
+    {
+      "id": 19,
+      "type": "theorie",
+      "category": "theorie_generale",
+      "channel": "email",
+      "difficulty": "debutant",
+      "title": "Que faire en cas de clic accidentel ?",
+      "scenario": {
+        "description": "Question pratique sur les réflexes à adopter."
+      },
+      "question": "Vous avez cliqué sur un lien de phishing et saisi vos identifiants bancaires avant de réaliser l'arnaque. Quelle est la PREMIÈRE chose à faire ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Faire opposition sur ma carte bancaire immédiatement",
+          "is_correct": true
+        },
+        {
+          "id": "B",
+          "text": "Signaler le SMS sur la plateforme 33700",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Changer tous mes mots de passe",
+          "is_correct": false
+        },
+        {
+          "id": "D",
+          "text": "Déposer plainte au commissariat",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "A",
+      "indicators": [],
+      "explanation": "L'ordre des actions est crucial :\n1. IMMÉDIATEMENT : Faire opposition sur votre carte bancaire (service interbancaire 24h/24 : 0 892 705 705, ou via l'app de votre banque)\n2. RAPIDEMENT : Changer vos mots de passe (le site compromis + tous les sites où vous utilisiez le même mot de passe)\n3. DANS LES HEURES SUIVANTES : Surveiller vos comptes bancaires pour détecter toute opération suspecte\n4. DANS LES JOURS SUIVANTS : Signaler sur 33700 (SMS), Signal-Spam (email), Pharos. Déposer plainte.\n5. EN CONTINU : Surveiller toute utilisation frauduleuse de votre identité\n\nChaque minute compte pour l'opposition bancaire car les virements frauduleux sont souvent instantanés.",
+      "risks": [
+        "Prélèvements en cours pendant que vous hésitez",
+        "Les fonds sont irrécupérables une fois transférés à l'étranger",
+        "Votre banque pourrait invoquer un retard comme 'négligence grave'"
+      ],
+      "official_verification": "Opposition carte : 0 892 705 705 (24h/24). Plateforme Info Escroqueries : 0 805 805 817. Site : 17Cyber.gouv.fr",
+      "source_context": "Procédures recommandées par Cybermalveillance.gouv.fr."
+    },
+    {
+      "id": 20,
+      "type": "scenario_visuel",
+      "category": "telecom",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "arnaque",
+      "title": "Email de facture Orange anormalement élevée",
+      "scenario": {
+        "description": "Vous êtes client Orange. Vous recevez cet email :",
+        "simulated_content": {
+          "from": "facture@orange-service-client.net",
+          "subject": "Facture Orange n°FA-2026-0891 — Montant : 247,83€",
+          "body": "Cher(e) client(e),\n\nVotre facture du mois de février 2026 d'un montant de 247,83€ est disponible.\n\nCe montant inhabituel est dû à des communications hors forfait. Si vous contestez cette facture, cliquez ci-dessous pour accéder à votre réclamation :\n\n[Contester ma facture]\n\nSans action de votre part sous 72h, le prélèvement sera effectué.\n\nOrange Service Client"
+        }
+      },
+      "question": "Ce montant est 4 fois supérieur à votre facture habituelle. Que faites-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Je clique pour contester avant le prélèvement",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Je vérifie ma facture directement dans l'espace client orange.fr ou l'app Orange",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "J'appelle le numéro indiqué dans l'email pour contester",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine '@orange-service-client.net' n'est pas orange.fr",
+        "Le montant anormalement élevé est conçu pour provoquer la panique et un clic réflexe",
+        "Le bouton 'Contester' est en réalité le piège — il mène vers un faux site",
+        "Menace de prélèvement sous 72h pour créer l'urgence",
+        "L'email ne contient pas votre nom ni votre numéro client"
+      ],
+      "explanation": "Cette arnaque est particulièrement efficace car elle exploite la peur d'un prélèvement injustifié. La réaction naturelle ('je dois contester !') est exactement ce que les escrocs veulent provoquer. Le lien de contestation mène vers un faux site Orange qui collecte vos identifiants et/ou coordonnées bancaires. Orange, Free, SFR et Bouygues : vos vraies factures sont TOUJOURS accessibles dans votre espace client officiel. En cas de doute, allez-y directement sans cliquer sur le lien de l'email.",
+      "risks": [
+        "Vol des identifiants espace client (accès à vos données personnelles, RIB…)",
+        "Vol de coordonnées bancaires",
+        "Souscription frauduleuse de services/forfaits"
+      ],
+      "official_verification": "Connectez-vous sur orange.fr ou l'app Orange et mes Comptes. Appelez le 3900.",
+      "source_context": "Les opérateurs télécom figurent parmi les marques les plus usurpées dans les campagnes de phishing en France."
+    },
+    {
+      "id": 21,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 1,
+      "title": "Vrai SMS Chronopost — notification de livraison",
+      "scenario": {
+        "description": "Vous attendez un colis commandé hier sur Amazon. Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "38004",
+          "message": "Chronopost : Votre colis 2X8849302FR est en cours de livraison aujourd'hui. Suivez-le sur l'application Chronopost ou sur chronopost.fr"
+        }
+      },
+      "question": "Ce SMS est-il légitime ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Oui, c'est un vrai SMS Chronopost",
+          "is_correct": true
+        },
+        {
+          "id": "B",
+          "text": "Non, c'est forcément du phishing",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Impossible à dire sans cliquer sur le lien",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "A",
+      "indicators": [
+        "Numéro court professionnel (38004) — pas un 06/07 mobile",
+        "Le SMS ne contient AUCUN lien cliquable — il vous invite à aller vous-même sur chronopost.fr ou l'app",
+        "Numéro de suivi fourni, vérifiable indépendamment",
+        "Aucune demande de paiement ou de données personnelles",
+        "Cohérence avec une commande réelle que vous attendez"
+      ],
+      "explanation": "C'est un vrai SMS de Chronopost. Les indices clés : le numéro court 38004 (les escrocs utilisent des 06/07), l'absence de lien direct (Chronopost vous renvoie vers l'app ou le site officiel sans lien cliquable), et surtout aucune demande de paiement. Le numéro de suivi peut être vérifié de manière indépendante. Comparez avec la question 1 : le faux SMS venait d'un 07, contenait un lien vers un domaine frauduleux et demandait 1,99€. La différence se joue sur ces détails structurels, pas sur le logo ou la mise en forme.",
+      "key_lesson": "Un vrai SMS de livraison ne demande jamais de payer et ne contient généralement pas de lien cliquable — il vous oriente vers le site officiel ou l'application.",
+      "source_context": "Format confirmé des notifications Chronopost officielles."
+    },
+    {
+      "id": 22,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 3,
+      "title": "Vrai email Ameli — notification de remboursement",
+      "scenario": {
+        "description": "Vous avez consulté votre médecin la semaine dernière. Vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@assurance-maladie.fr",
+          "subject": "Votre remboursement Assurance Maladie",
+          "body": "Bonjour M. DUPONT Thomas,\n\nUn nouveau remboursement de soins a été effectué sur votre compte.\n\nPour consulter le détail de vos remboursements, connectez-vous à votre compte ameli.\n\nL'Assurance Maladie\n\nCeci est un message automatique. Merci de ne pas y répondre."
+        }
+      },
+      "question": "Cet email est-il authentique ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, l'Assurance Maladie n'envoie jamais d'emails",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Oui, c'est une vraie notification Ameli",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "C'est suspect car il ne précise pas le montant",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine @assurance-maladie.fr est le domaine officiel vérifié",
+        "Le message est nominatif (M. DUPONT Thomas)",
+        "Aucun lien direct dans le corps du mail — il dit 'connectez-vous à votre compte ameli' sans fournir de lien",
+        "Aucune demande de données personnelles ou bancaires",
+        "Le montant n'est PAS indiqué dans l'email (contrairement aux faux qui mettent un montant précis pour appâter)",
+        "Cohérence avec une consultation récente réelle"
+      ],
+      "explanation": "C'est un vrai email de l'Assurance Maladie. Paradoxalement, le fait de NE PAS préciser le montant est un signe de légitimité : les vrais emails Ameli vous informent qu'un remboursement a été effectué et vous invitent à consulter le détail sur votre compte, sans donner le montant dans l'email. Les faux, eux, affichent un montant précis (ex: 287,40€) pour vous motiver à cliquer. Autres indices : le domaine @assurance-maladie.fr est correct, le message est nominatif, et il n'y a pas de lien cliquable.",
+      "key_lesson": "Les vrais emails d'organismes officiels sont souvent plus sobres que les faux : pas de montant affiché, pas de lien direct, pas d'urgence. C'est le contraire de ce qu'on attend intuitivement.",
+      "source_context": "Format confirmé par ameli.fr — domaines officiels d'envoi : @assurance-maladie.fr et @info.ameli.fr."
+    },
+    {
+      "id": 23,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "sms",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 12,
+      "title": "Vraie alerte fraude bancaire par SMS",
+      "scenario": {
+        "description": "Vous recevez ce SMS de votre banque :",
+        "simulated_content": {
+          "sender": "BNP Paribas",
+          "message": "BNP Paribas — Alerte sécurité : un paiement de 180,00 EUR chez AMAZON EU a été détecté. Si vous êtes à l'origine de ce paiement, aucune action n'est requise. Dans le cas contraire, connectez-vous à votre application Mes Comptes BNP Paribas."
+        }
+      },
+      "question": "Ce SMS est-il une vraie alerte de votre banque ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, les banques n'envoient jamais de SMS",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Non, car le nom d'expéditeur peut être usurpé",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Oui, les indices structurels correspondent à une vraie alerte bancaire",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "C",
+      "indicators": [
+        "Le message ne contient AUCUN lien cliquable",
+        "Il ne demande AUCUNE action immédiate — 'aucune action requise' si c'est vous",
+        "Il vous dirige vers VOTRE application (pas un site web via lien)",
+        "Il mentionne un commerçant identifiable (Amazon EU) et un montant rond",
+        "Il n'y a aucune menace, aucune urgence artificielle",
+        "Pas de demande de données personnelles ou bancaires"
+      ],
+      "explanation": "C'est une vraie alerte bancaire. La différence cruciale avec le faux SMS bancaire (question 12) : ici, AUCUN lien n'est fourni. Le message vous informe et vous redirige vers votre propre application. Il ne crée pas de panique ('aucune action requise') et ne demande rien. Le faux, lui, contenait un lien d'annulation (le piège) et jouait sur l'urgence. Attention : le nom d'expéditeur PEUT être usurpé (option B), mais l'ensemble des autres indices structurels confirme la légitimité. Dans le doute, le bon réflexe reste d'ouvrir l'app bancaire soi-même.",
+      "key_lesson": "Une vraie alerte bancaire INFORME sans DEMANDER. Elle ne contient ni lien, ni formulaire, ni demande de rappel. Elle vous renvoie vers vos propres outils (app, site officiel).",
+      "source_context": "Format type des alertes SMS bancaires conformes aux recommandations de la Fédération Bancaire Française."
+    },
+    {
+      "id": 24,
+      "type": "scenario_visuel",
+      "category": "impots",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 7,
+      "title": "Vrai email des impôts — ouverture de la déclaration",
+      "scenario": {
+        "description": "Mi-avril, vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@dgfip.finances.gouv.fr",
+          "subject": "Ouverture de la déclaration de revenus 2025",
+          "body": "Bonjour,\n\nLe service de déclaration en ligne des revenus 2025 est ouvert depuis le 10 avril 2026.\n\nVous pouvez déclarer vos revenus en vous connectant à votre espace particulier sur impots.gouv.fr\n\nLa date limite de déclaration en ligne pour votre département est le 22 mai 2026.\n\nCordialement,\nLa Direction générale des Finances publiques"
+        }
+      },
+      "question": "Cet email est-il authentique ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, la DGFiP ne contacte jamais par email",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Oui, c'est un vrai rappel de la DGFiP",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "C'est suspect car il n'y a pas de numéro fiscal dans l'email",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine @dgfip.finances.gouv.fr est le domaine officiel (terminaison .gouv.fr)",
+        "Le message est informatif — il ne demande RIEN (pas de lien, pas de formulaire, pas de paiement)",
+        "Il mentionne une date limite départementale précise et réaliste",
+        "Il vous invite à vous connecter VOUS-MÊME sur impots.gouv.fr sans fournir de lien",
+        "Aucune mention de remboursement, d'urgence ou de pénalité",
+        "L'absence de numéro fiscal est NORMALE — la DGFiP ne met jamais d'informations sensibles dans un email"
+      ],
+      "explanation": "C'est un vrai email de la DGFiP. La Direction générale des Finances publiques envoie bien des emails d'information, notamment pour annoncer l'ouverture de la campagne déclarative. La clé : le domaine est en .gouv.fr (comparez avec le faux de la question 7 dont le vrai domaine était @mailer-service.fr), le message ne contient aucun lien cliquable, ne demande rien, et ne promet pas d'argent. L'option C est un piège : l'absence de numéro fiscal est justement une bonne pratique de sécurité de la DGFiP.",
+      "key_lesson": "La DGFiP envoie bien des emails, mais uniquement informatifs, depuis un domaine .gouv.fr, sans lien cliquable et sans données personnelles. Tout email DGFiP contenant un lien, un formulaire ou une demande de paiement est frauduleux.",
+      "source_context": "Page officielle impots.gouv.fr sur les communications légitimes de la DGFiP."
+    },
+    {
+      "id": 25,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "email",
+      "difficulty": "debutant",
+      "verdict": "legitime",
+      "pairs_with": 18,
+      "title": "Vrai email Amazon — confirmation d'expédition",
+      "scenario": {
+        "description": "Vous avez commandé un livre sur Amazon hier. Vous recevez cet email :",
+        "simulated_content": {
+          "from": "envoi-confirme@amazon.fr",
+          "subject": "Votre commande Amazon n°402-8847291-6639501 a été expédiée",
+          "body": "Bonjour Thomas,\n\nVotre commande a été expédiée.\n\nArticle : \"Cybersécurité pour les Nuls\" × 1\nLivreur : Amazon Logistics\nDate de livraison estimée : jeudi 7 mars 2026\n\nSuivez votre colis :\nhttps://www.amazon.fr/gp/your-account/order-details?orderID=402-8847291-6639501\n\nMerci pour votre achat !\nAmazon.fr"
+        }
+      },
+      "question": "Cet email est-il légitime ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, il contient un lien — c'est suspect",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Oui, tous les indices convergent vers un email Amazon authentique",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "Impossible à dire sans analyser les en-têtes techniques",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine @amazon.fr est le domaine officiel",
+        "Le lien pointe vers www.amazon.fr (domaine officiel) avec un chemin cohérent",
+        "Le message est personnalisé : prénom, numéro de commande réel, article commandé",
+        "Cohérence totale avec une commande que vous avez réellement passée hier",
+        "Aucune demande de paiement supplémentaire ni de données personnelles",
+        "Le numéro de commande correspond au format Amazon standard"
+      ],
+      "explanation": "C'est un vrai email Amazon. Attention : contrairement aux organismes publics (impôts, Ameli), les entreprises privées comme Amazon incluent bien des liens dans leurs emails légitimes. La présence d'un lien n'est donc PAS automatiquement suspecte. Ce qui compte : le domaine du lien (www.amazon.fr, pas amazon-suivi.com), la personnalisation détaillée (article exact, numéro de commande vérifiable), et la cohérence avec votre activité réelle. Le piège pédagogique ici : ne pas tomber dans l'excès inverse en rejetant tout email contenant un lien.",
+      "key_lesson": "La présence d'un lien dans un email n'est pas automatiquement un signe de fraude. Vérifiez le DOMAINE du lien, la cohérence avec vos actions récentes, et la personnalisation du message.",
+      "source_context": "Format standard des emails transactionnels Amazon.fr."
+    },
+    {
+      "id": 26,
+      "type": "scenario_visuel",
+      "category": "caf_prestations",
+      "channel": "sms",
+      "difficulty": "debutant",
+      "verdict": "legitime",
+      "pairs_with": 9,
+      "title": "Vrai SMS de la CAF — rappel de déclaration trimestrielle",
+      "scenario": {
+        "description": "Vous êtes allocataire de la CAF. En début de trimestre, vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "CAF",
+          "message": "CAF : Pensez à déclarer vos ressources trimestrielles avant le 25 mars sur caf.fr ou l'appli Caf - Mon Compte. Sans déclaration, vos aides pourraient être suspendues."
+        }
+      },
+      "question": "Ce SMS est-il authentique ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, la CAF ne menace jamais de suspendre les aides",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Oui, c'est un vrai rappel de la CAF",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "C'est suspect car il n'y a pas de numéro d'allocataire",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Expéditeur 'CAF' en nom court (pas un 06/07)",
+        "Pas de lien cliquable — il vous oriente vers caf.fr ou l'application par leur nom",
+        "La mention de suspension est FACTUELLE (la CAF suspend effectivement en l'absence de déclaration trimestrielle)",
+        "Aucune demande de données bancaires ou personnelles",
+        "L'absence de numéro d'allocataire est normale — la CAF ne met pas de données personnelles dans un SMS",
+        "Timing cohérent : début de trimestre"
+      ],
+      "explanation": "C'est un vrai SMS de la CAF. Piège subtil : la mention de suspension des aides peut sembler menaçante et ressembler à une technique de scam. Mais ici, c'est une information factuelle — la CAF suspend effectivement les versements si la déclaration trimestrielle n'est pas faite. La différence avec le faux email CAF (question 9) : ici, pas de lien, pas de montant précis mirobolant, pas de demande de coordonnées bancaires, et le SMS vous renvoie vers le site officiel par son nom. Le faux promettait une prime de 385,20€ et demandait de 'confirmer' des coordonnées bancaires.",
+      "key_lesson": "Un message peut être légitime même s'il mentionne une conséquence négative (suspension d'aides). Ce qui distingue un vrai rappel d'un scam : pas de lien direct, pas de demande de données, et une action vérifiable sur le site officiel.",
+      "source_context": "La CAF envoie bien des SMS de rappel pour les déclarations trimestrielles de ressources."
+    },
+    {
+      "id": 27,
+      "type": "scenario_visuel",
+      "category": "telecom",
+      "channel": "email",
+      "difficulty": "intermediaire",
+      "verdict": "legitime",
+      "pairs_with": 20,
+      "title": "Vraie facture Orange par email",
+      "scenario": {
+        "description": "Le 5 du mois, comme d'habitude, vous recevez cet email :",
+        "simulated_content": {
+          "from": "ne-pas-repondre@contact.orange.fr",
+          "subject": "Votre facture Orange du 05/03/2026 — 29,99 €",
+          "body": "Bonjour Thomas DUPONT,\n\nVotre facture n° FA26030587421 du 05/03/2026 est disponible.\nMontant : 29,99 €\nLigne concernée : 06 XX XX XX 42\n\nRetrouvez le détail de votre facture dans votre Espace Client sur orange.fr ou dans l'application Orange et Moi.\n\nSi vous êtes en prélèvement automatique, aucune action n'est requise.\n\nOrange — Service Client"
+        }
+      },
+      "question": "Cet email de facture Orange est-il authentique ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Non, le montant est trop précis pour être vrai",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "C'est suspect — il faut vérifier le lien avant de cliquer",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Oui, c'est une vraie notification de facture Orange",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "C",
+      "indicators": [
+        "Le domaine @contact.orange.fr est un sous-domaine légitime d'orange.fr",
+        "Le message est nominatif (nom complet + numéro de ligne partiel)",
+        "Le montant (29,99€) est cohérent avec un forfait classique et votre historique",
+        "Le numéro de facture est fourni et vérifiable",
+        "Pas de lien cliquable dans le corps — renvoi vers l'Espace Client et l'app",
+        "Mention du prélèvement automatique et 'aucune action requise'",
+        "Date d'envoi cohérente avec le cycle de facturation habituel (le 5 du mois)"
+      ],
+      "explanation": "C'est une vraie facture Orange. Comparez avec le faux (question 20) : celui-ci venait de @orange-service-client.net (domaine non-officiel), affichait un montant anormalement élevé (247,83€) pour créer la panique, menaçait d'un prélèvement sous 72h, et contenait un bouton 'Contester'. Ici, tout est cohérent : domaine officiel, montant normal, personnalisation complète, aucune urgence, et renvoi vers les canaux officiels sans lien direct.",
+      "key_lesson": "Comparez toujours avec vos factures habituelles : même expéditeur, même format, montant cohérent, même date dans le mois. Un changement soudain dans l'un de ces éléments est un signal d'alerte.",
+      "source_context": "Format standard des notifications de facture Orange confirmé via orange.fr.",
+      "illustration": {
+        "filename": "q27_vraie_facture_orange_par_email.png",
+        "path": "data/quiz_images/q27_vraie_facture_orange_par_email.png",
+        "model": "gemini-3-pro-image-preview",
+        "generated_at": "2026-03-06T16:58:48Z"
+      }
+    },
+    {
+      "id": 28,
+      "type": "scenario_visuel",
+      "category": "livraison_colis",
+      "channel": "sms",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "title": "SMS de livraison avec numéro inhabituel",
+      "scenario": {
+        "description": "Vous attendez un colis Vinted. Vous recevez ce SMS :",
+        "simulated_content": {
+          "sender": "+33 7 80 09 44 12",
+          "message": "Mondial Relay : votre colis MR-4829174 est disponible au Point Relais Tabac Presse du Centre, 14 rue de la République. Retrait avant le 12/03. Munissez-vous de votre pièce d'identité."
+        }
+      },
+      "question": "Vous attendez bien un colis Vinted via Mondial Relay. Que faites-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Le numéro en 07 est suspect — c'est forcément un scam",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "C'est sûr, les détails correspondent à mon colis",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Le contenu semble cohérent mais le numéro d'envoi est inhabituel — je vérifie sur l'app Vinted ou mondial relay avant de me déplacer",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "C",
+      "indicators": [
+        "Le numéro en 07 est atypique pour Mondial Relay (normalement un numéro court), MAIS certains sous-traitants de livraison utilisent parfois des numéros mobiles",
+        "Le contenu est cohérent : numéro de colis, adresse du point relais, demande de pièce d'identité (normal pour Mondial Relay)",
+        "Pas de lien, pas de demande de paiement — ce qui plaide pour la légitimité",
+        "Mais l'adresse du point relais et le numéro de colis pourraient être inventés"
+      ],
+      "explanation": "Ce message est ambiguë et illustre une situation réelle fréquente. Le contenu ne présente aucun signal d'arnaque classique (pas de lien, pas de paiement), mais le numéro d'expédition en 07 est inhabituel. Dans ce cas, la bonne réaction n'est ni de rejeter par principe, ni de faire confiance aveuglément, mais de vérifier par un canal indépendant : l'app Vinted affiche le suivi et le point relais, le site mondialrelay.fr permet de vérifier le numéro de colis. C'est le réflexe universel à ancrer.",
+      "key_lesson": "Quand un message est ambigu, la réponse n'est jamais 'cliquer pour vérifier' mais 'vérifier par un autre canal'. Ouvrez l'application d'origine (Vinted, Amazon, etc.) pour confirmer les informations.",
+      "source_context": "Cas réel : certains transporteurs sous-traitent les notifications SMS à des prestataires qui utilisent des numéros mobiles.",
+      "illustration": {
+        "filename": "q28_sms_de_livraison_avec_numero_inhabituel.png",
+        "path": "data/quiz_images/q28_sms_de_livraison_avec_numero_inhabituel.png",
+        "model": "gemini-3-pro-image-preview",
+        "generated_at": "2026-03-06T16:58:48Z"
+      }
+    },
+    {
+      "id": 29,
+      "type": "scenario_visuel",
+      "category": "assurance_maladie",
+      "channel": "email",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "title": "Email de mutuelle avec pièce jointe PDF",
+      "scenario": {
+        "description": "Vous recevez cet email de votre mutuelle :",
+        "simulated_content": {
+          "from": "espace-adherent@harmonie-mutuelle.fr",
+          "subject": "Votre relevé de prestations — Février 2026",
+          "body": "Bonjour M. Dupont,\n\nVeuillez trouver ci-joint votre relevé de prestations du mois de février 2026.\n\nPour toute question, connectez-vous à votre espace adhérent sur harmonie-mutuelle.fr ou appelez le 3233.\n\nCordialement,\nHarmonie Mutuelle\n\nPièce jointe : Releve_Prestations_022026.pdf"
+        }
+      },
+      "question": "Le domaine semble correct et vous êtes bien chez Harmonie Mutuelle. Que faites-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "J'ouvre la pièce jointe — tout semble en ordre",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "Je ne l'ouvre pas et je vérifie d'abord si le même document est disponible dans mon espace adhérent en ligne",
+          "is_correct": true
+        },
+        {
+          "id": "C",
+          "text": "C'est un scam — les mutuelles n'envoient jamais de pièces jointes",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "B",
+      "indicators": [
+        "Le domaine @harmonie-mutuelle.fr SEMBLE correct (mais pourrait être usurpé via spoofing d'en-tête)",
+        "Le format est professionnel et cohérent avec les communications habituelles",
+        "Les mutuelles envoient effectivement des relevés par email avec PDF — ce n'est PAS intrinsèquement suspect",
+        "MAIS les PDF peuvent contenir des liens de phishing ou du code malveillant",
+        "MAIS l'adresse d'expédition affichée peut être falsifiée sans que le domaine réel soit celui affiché"
+      ],
+      "explanation": "Ce message est probablement légitime, mais la prudence s'impose avec les pièces jointes, même quand tout semble correct. L'adresse d'expédition affichée peut être falsifiée (le 'From' visible n'est pas le vrai domaine d'envoi). Et les PDF peuvent contenir des liens de phishing — ce vecteur est en forte hausse depuis 2025. Le bon réflexe : avant d'ouvrir la pièce jointe, connectez-vous à votre espace adhérent en ligne. Si le relevé y est disponible, consultez-le depuis là-bas. C'est une hygiène de sécurité, pas de la paranoïa.",
+      "key_lesson": "Même un email apparemment légitime avec pièce jointe mérite une vérification croisée. Les relevés et documents sont presque toujours disponibles dans votre espace client en ligne — préférez toujours cette voie.",
+      "source_context": "Augmentation des PDF contenant des liens de phishing documentée par les rapports de sécurité 2025.",
+      "illustration": {
+        "filename": "q29_email_de_mutuelle_avec_piece_jointe_pdf.png",
+        "path": "data/quiz_images/q29_email_de_mutuelle_avec_piece_jointe_pdf.png",
+        "model": "gemini-3-pro-image-preview",
+        "generated_at": "2026-03-06T16:58:48Z"
+      }
+    },
+    {
+      "id": 30,
+      "type": "scenario_visuel",
+      "category": "banque",
+      "channel": "appel",
+      "difficulty": "avance",
+      "verdict": "suspect",
+      "pairs_with": 6,
+      "title": "Appel de votre banque suite à un achat à l'étranger",
+      "scenario": {
+        "description": "Vous venez de payer un hôtel en Espagne sur Booking.com avec votre carte bancaire. 10 minutes plus tard, votre téléphone sonne :",
+        "simulated_content": {
+          "caller_display": "Numéro masqué",
+          "transcript": "Bonjour Monsieur Dupont, ici le service des opérations internationales du Crédit Agricole. Nous vous contactons car nous avons détecté un paiement de 340€ auprès d'un hôtel en Espagne qui sort de votre profil d'utilisation habituel. Pouvez-vous confirmer que vous êtes à l'origine de ce paiement ? Nous voulons simplement nous en assurer avant de le valider."
+        }
+      },
+      "question": "L'appel correspond exactement à l'achat que vous venez de faire. Que répondez-vous ?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Je confirme le paiement, c'est cohérent et ça me rassure",
+          "is_correct": false
+        },
+        {
+          "id": "B",
+          "text": "C'est un scam évident — je raccroche immédiatement",
+          "is_correct": false
+        },
+        {
+          "id": "C",
+          "text": "Je ne confirme ni n'infirme. Je dis que je vais rappeler ma banque moi-même pour confirmer.",
+          "is_correct": true
+        }
+      ],
+      "correct_answer": "C",
+      "indicators": [
+        "La coïncidence temporelle est TRÈS convaincante — 10 min après un vrai paiement",
+        "Les banques appellent effectivement pour des paiements inhabituels à l'étranger",
+        "MAIS le numéro est masqué — impossible de vérifier l'origine",
+        "MAIS un escroc ayant intercepté la transaction (skimming, fuite côté marchand) pourrait connaître le montant et le timing",
+        "L'appel ne demande QUE confirmation (pas de code, pas de validation) — ce qui ressemble à un vrai appel",
+        "MAIS confirmer donne à un éventuel escroc l'info qu'il s'agit bien du titulaire de la carte"
+      ],
+      "explanation": "Ce cas est le plus subtil du quiz. Il est POSSIBLE que ce soit un vrai appel de votre banque — elles font effectivement ce type de vérification. Mais il est IMPOSSIBLE de le certifier au téléphone, surtout depuis un numéro masqué. La coïncidence temporelle ne prouve rien : en cas de compromission des données de paiement côté marchand, l'escroc connaît le montant et le timing exact. La seule réponse sûre : 'Je vais raccrocher et rappeler le Crédit Agricole moi-même.' Un vrai conseiller comprendra parfaitement cette prudence — et si ce n'en était pas un, vous venez d'éviter une arnaque.",
+      "key_lesson": "Le réflexe 'je raccroche et je rappelle moi-même' est TOUJOURS la bonne réponse pour un appel entrant, même quand tout semble cohérent. Un vrai conseiller ne sera jamais offensé par cette prudence.",
+      "source_context": "Recommandation universelle de la Fédération Bancaire Française et de Cybermalveillance.gouv.fr.",
+      "illustration": {
+        "filename": "q30_appel_de_votre_banque_suite_a_un_achat_a_letranger.png",
+        "path": "data/quiz_images/q30_appel_de_votre_banque_suite_a_un_achat_a_letranger.png",
+        "model": "gemini-3-pro-image-preview",
+        "generated_at": "2026-03-06T16:58:48Z"
+      }
+    }
+  ]
+}
