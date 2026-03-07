@@ -97,6 +97,18 @@ export function QuizPage(): JSX.Element {
               {isCorrect ? 'Bonne réponse' : 'Réponse incorrecte'}
             </p>
             <p className="mt-2 text-sm text-slate-300">{question.explanation}</p>
+            {question.risks && question.risks.length > 0 && (
+              <div className="mt-4 rounded-lg border border-amber-300/30 bg-amber-500/10 p-3">
+                <p className="text-xs font-semibold uppercase tracking-wide text-amber-200">
+                  Risques / Conséquences possibles
+                </p>
+                <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-amber-50">
+                  {question.risks.map((risk) => (
+                    <li key={risk}>{risk}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </article>
