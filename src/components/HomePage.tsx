@@ -4,7 +4,7 @@ import { useQuizStore } from '../features/quiz/store';
 
 export function HomePage(): JSX.Element {
   const navigate = useNavigate();
-  const { restart } = useQuizStore();
+  const { startQuiz, startBrowse } = useQuizStore();
 
   return (
     <section className="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
@@ -18,7 +18,7 @@ export function HomePage(): JSX.Element {
           <button
             className="rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
             onClick={() => {
-              restart();
+              startQuiz();
               navigate('/quiz');
             }}
             type="button"
@@ -31,6 +31,16 @@ export function HomePage(): JSX.Element {
           >
             Voir les thèmes
           </Link>
+          <button
+            className="rounded-lg border border-cyan-500/50 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:border-cyan-300 hover:text-cyan-100"
+            onClick={() => {
+              startBrowse();
+              navigate('/quiz');
+            }}
+            type="button"
+          >
+            Explorer toutes les questions
+          </button>
         </div>
       </div>
 

@@ -1,6 +1,5 @@
 import { Navigate, useNavigate } from 'react-router-dom';
-import { getScore, useQuizStore } from '../features/quiz/store';
-import { quizDatabase } from '../features/quiz/data';
+import { getScore, getSessionQuestions, useQuizStore } from '../features/quiz/store';
 import { resolveImageByQuestionId } from '../features/quiz/images';
 
 function formatScenarioContent(content: Record<string, unknown>): string {
@@ -11,13 +10,14 @@ function formatScenarioContent(content: Record<string, unknown>): string {
 
 export function QuizPage(): JSX.Element {
   const navigate = useNavigate();
-  const { currentIndex, answers, completed, submitAnswer, next } = useQuizStore();
+  const { mode, currentIndex, answers, completed, submitAnswer, next } = useQuizStore();
 
   if (completed) {
     return <Navigate to="/result" replace />;
   }
 
-  const question = quizDatabase.questions[currentIndex];
+  const sessionQuestions = getSessionQuestions();
+  const question = sessionQuestions[currentIndex];
   if (!question) {
     return <Navigate to="/" replace />;
   }
@@ -27,12 +27,12 @@ export function QuizPage(): JSX.Element {
   const isCorrect = selected === question.correct_answer;
   const canContinue = Boolean(selected);
 
-  const isLast = currentIndex === quizDatabase.questions.length - 1;
+  const isLast = currentIndex === sessionQuestions.length - 1;
 
   return (
     <section className="space-y-6">
       <div className="flex items-center justify-between text-sm text-slate-300">
-        <span>Question {currentIndex + 1} / {quizDatabase.questions.length}</span>
+        <span>Question {currentIndex + 1} / {sessionQuestions.length}</span>
         <span className="rounded-full border border-slate-700 px-3 py-1">{question.difficulty}</span>
       </div>
 
@@ -123,7 +123,9 @@ export function QuizPage(): JSX.Element {
         </button>
 
         <div className="flex items-center gap-3">
-          <p className="text-sm text-slate-300">Score actuel: {getScore().correct}</p>
+          <p className="text-sm text-slate-300">
+            Score actuel: {getScore().correct} {mode === 'quiz' ? '/ 10' : ''}
+          </p>
           <button
             className="rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-300"
             disabled={!canContinue}
