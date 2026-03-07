@@ -1,7 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { quizDatabase } from '../features/quiz/data';
+import { useQuizStore } from '../features/quiz/store';
 
 export function HomePage(): JSX.Element {
+  const navigate = useNavigate();
+  const { restart } = useQuizStore();
+
   return (
     <section className="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
       <div className="rounded-2xl border border-cyan-500/30 bg-slate-900/70 p-6 shadow-lg shadow-cyan-900/20">
@@ -11,12 +15,16 @@ export function HomePage(): JSX.Element {
           Entraînez-vous avec des scénarios réalistes SMS, email, WhatsApp et appels pour apprendre les bons réflexes anti-phishing.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link
+          <button
             className="rounded-lg bg-cyan-400 px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-            to="/quiz"
+            onClick={() => {
+              restart();
+              navigate('/quiz');
+            }}
+            type="button"
           >
             Commencer le quiz
-          </Link>
+          </button>
           <Link
             className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 transition hover:border-slate-500"
             to="/learn"
