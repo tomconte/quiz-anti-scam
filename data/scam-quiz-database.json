@@ -101,7 +101,8 @@
         "Revente de vos données personnelles"
       ],
       "official_verification": "Vérifiez le suivi de votre colis directement sur chronopost.fr ou via l'app Chronopost",
-      "source_context": "Les arnaques au faux colis représentent l'un des scénarios de smishing les plus fréquents en France en 2025-2026, exploitant les habitudes d'achat en ligne."
+      "source_context": "Les arnaques au faux colis représentent l'un des scénarios de smishing les plus fréquents en France en 2025-2026, exploitant les habitudes d'achat en ligne.",
+      "pairs_with": 21
     },
     {
       "id": 2,
@@ -201,7 +202,8 @@
         "Accès frauduleux à FranceConnect via les identifiants Ameli"
       ],
       "official_verification": "Connectez-vous directement sur ameli.fr ou appelez le 3646",
-      "source_context": "Campagne de phishing majeure début 2026 signalée par l'Assurance Maladie, amplifiée par les fuites Viamedis/Almerys."
+      "source_context": "Campagne de phishing majeure début 2026 signalée par l'Assurance Maladie, amplifiée par les fuites Viamedis/Almerys.",
+      "pairs_with": 22
     },
     {
       "id": 4,
@@ -261,7 +263,8 @@
       "difficulty": "intermediaire",
       "title": "L'IA et le phishing en 2025-2026",
       "scenario": {
-        "description": "Question théorique sur l'évolution des techniques de phishing."
+        "description": "Question théorique sur l'évolution des techniques de phishing.",
+        "simulated_content": {}
       },
       "question": "Pourquoi les fautes d'orthographe ne sont-elles plus un indicateur fiable pour détecter un email de phishing en 2026 ?",
       "options": [
@@ -287,15 +290,12 @@
         }
       ],
       "correct_answer": "A",
-      "indicators": [],
-      "explanation": "L'IA générative (ChatGPT, etc.) a révolutionné le phishing. Les emails générés par IA sont sans faute, dans un ton professionnel adapté à chaque cible, et même multilingues. Selon Microsoft, les emails de phishing générés par IA obtiennent un taux de clic de 54%, contre seulement 12% pour les messages rédigés manuellement. En 2026, on estime que 80% des attaques de phishing utilisent l'IA. Il faut donc se concentrer sur d'autres indices : adresse d'expédition, URL des liens, contexte de la demande.",
-      "risks": [
-        "Baisse de vigilance face à des messages bien écrits",
-        "Phishing ultra-personnalisé exploitant les données des réseaux sociaux",
-        "Deepfakes vocaux utilisés en complément"
+      "indicators": [
+        "Question theorique: analyser le contexte et lire l'explication pour retenir le bon reflexe."
       ],
-      "official_verification": "",
-      "source_context": "Rapport Microsoft MDDR 2025, rapport Kaspersky Spam & Phishing 2025."
+      "explanation": "L'IA générative (ChatGPT, etc.) a révolutionné le phishing. Les emails générés par IA sont sans faute, dans un ton professionnel adapté à chaque cible, et même multilingues. Selon Microsoft, les emails de phishing générés par IA obtiennent un taux de clic de 54%, contre seulement 12% pour les messages rédigés manuellement. En 2026, on estime que 80% des attaques de phishing utilisent l'IA. Il faut donc se concentrer sur d'autres indices : adresse d'expédition, URL des liens, contexte de la demande.",
+      "source_context": "Rapport Microsoft MDDR 2025, rapport Kaspersky Spam & Phishing 2025.",
+      "verdict": null
     },
     {
       "id": 6,
@@ -345,7 +345,8 @@
         "Les fonds sont transférés en quelques secondes et souvent irrécupérables"
       ],
       "official_verification": "Raccrochez. Rappeler le numéro de votre banque figurant sur votre carte ou contrat.",
-      "source_context": "Loi française sur le spoofing : depuis octobre 2024, les opérateurs doivent authentifier les numéros pour lutter contre l'usurpation."
+      "source_context": "Loi française sur le spoofing : depuis octobre 2024, les opérateurs doivent authentifier les numéros pour lutter contre l'usurpation.",
+      "pairs_with": 30
     },
     {
       "id": 7,
@@ -400,7 +401,8 @@
         "Attaque en cascade : phishing suivi d'un appel de faux conseiller"
       ],
       "official_verification": "Connectez-vous directement sur impots.gouv.fr (tapez l'adresse manuellement). Toute communication fiscale légitime est visible dans votre espace personnel.",
-      "source_context": "Alerte officielle DGFiP impots.gouv.fr : exemples d'adresses frauduleuses recensées."
+      "source_context": "Alerte officielle DGFiP impots.gouv.fr : exemples d'adresses frauduleuses recensées.",
+      "pairs_with": 24
     },
     {
       "id": 8,
@@ -410,7 +412,8 @@
       "difficulty": "intermediaire",
       "title": "Le cadenas HTTPS est-il une garantie ?",
       "scenario": {
-        "description": "Affirmation à évaluer."
+        "description": "Affirmation à évaluer.",
+        "simulated_content": {}
       },
       "question": "VRAI ou FAUX : Si un site web affiche un cadenas vert (HTTPS) dans la barre d'adresse, cela signifie qu'il est sûr et légitime.",
       "options": [
@@ -426,14 +429,12 @@
         }
       ],
       "correct_answer": "B",
-      "indicators": [],
-      "explanation": "En 2026, n'importe qui peut obtenir un certificat HTTPS gratuit en quelques secondes (via Let's Encrypt par exemple). Le cadenas signifie uniquement que la communication entre vous et le site est chiffrée — mais le site lui-même peut être frauduleux. Autrement dit, vos données seront transmises de manière chiffrée… directement aux escrocs. Ce qui compte, c'est le NOM DE DOMAINE dans la barre d'adresse : vérifiez que c'est bien le domaine officiel (ex: impots.gouv.fr et non impots-gouv.sbs).",
-      "risks": [
-        "Fausse confiance menant à saisir des données sensibles",
-        "99% des sites de phishing utilisent désormais HTTPS"
+      "indicators": [
+        "Question theorique: analyser le contexte et lire l'explication pour retenir le bon reflexe."
       ],
-      "official_verification": "",
-      "source_context": "Tendance confirmée par les rapports APWG 2024-2025."
+      "explanation": "En 2026, n'importe qui peut obtenir un certificat HTTPS gratuit en quelques secondes (via Let's Encrypt par exemple). Le cadenas signifie uniquement que la communication entre vous et le site est chiffrée — mais le site lui-même peut être frauduleux. Autrement dit, vos données seront transmises de manière chiffrée… directement aux escrocs. Ce qui compte, c'est le NOM DE DOMAINE dans la barre d'adresse : vérifiez que c'est bien le domaine officiel (ex: impots.gouv.fr et non impots-gouv.sbs).",
+      "source_context": "Tendance confirmée par les rapports APWG 2024-2025.",
+      "verdict": null
     },
     {
       "id": 9,
@@ -483,7 +484,8 @@
         "Usurpation d'identité"
       ],
       "official_verification": "Consultez caf.fr ou l'application mobile Caf. Appelez le 3230.",
-      "source_context": "Alertes récurrentes de Cybermalveillance.gouv.fr sur les faux messages CAF."
+      "source_context": "Alertes récurrentes de Cybermalveillance.gouv.fr sur les faux messages CAF.",
+      "pairs_with": 26
     },
     {
       "id": 10,
@@ -542,7 +544,8 @@
       "difficulty": "avance",
       "title": "Le typosquatting",
       "scenario": {
-        "description": "Question sur les techniques de tromperie par URL."
+        "description": "Question sur les techniques de tromperie par URL.",
+        "simulated_content": {}
       },
       "question": "Parmi ces URLs, laquelle est le site officiel des impôts ?",
       "options": [
@@ -574,13 +577,8 @@
         "D : 'lmpots' avec un L minuscule au lieu du I — quasi invisible dans certaines polices"
       ],
       "explanation": "Le typosquatting exploite la ressemblance visuelle entre caractères (l/I, rn/m, 0/O) ou ajoute des tirets/sous-domaines pour créer des URLs trompeuses. La règle d'or : le VRAI domaine est toujours juste avant la première barre oblique '/'. Dans l'option C, 'impots.gouv.fr' n'est qu'un sous-domaine du vrai domaine 'paiement-secure.com'. C'est la technique la plus trompeuse car elle inclut littéralement l'URL officielle dans l'adresse frauduleuse.",
-      "risks": [
-        "Saisie de données sensibles sur un site cloné",
-        "Installation de malware",
-        "Vol d'identifiants et de coordonnées bancaires"
-      ],
-      "official_verification": "Toujours taper l'adresse manuellement dans le navigateur ou utiliser ses favoris",
-      "source_context": "Technique de typosquatting documentée par l'ANSSI et les rapports APWG."
+      "source_context": "Technique de typosquatting documentée par l'ANSSI et les rapports APWG.",
+      "verdict": null
     },
     {
       "id": 12,
@@ -629,7 +627,8 @@
         "Vidage du compte courant"
       ],
       "official_verification": "Ouvrez l'application officielle de votre banque ou appelez le numéro au dos de votre carte",
-      "source_context": "Alerte Fédération Bancaire Française sur les arnaques par SMS usurpant l'identité des banques."
+      "source_context": "Alerte Fédération Bancaire Française sur les arnaques par SMS usurpant l'identité des banques.",
+      "pairs_with": 23
     },
     {
       "id": 13,
@@ -688,7 +687,8 @@
       "difficulty": "avance",
       "title": "Le Quishing (phishing par QR code)",
       "scenario": {
-        "description": "Question sur une technique émergente."
+        "description": "Question sur une technique émergente.",
+        "simulated_content": {}
       },
       "question": "Qu'est-ce que le 'quishing' et pourquoi est-il particulièrement dangereux ?",
       "options": [
@@ -714,15 +714,12 @@
         }
       ],
       "correct_answer": "A",
-      "indicators": [],
-      "explanation": "Le quishing (QR code + phishing) a augmenté de 400% entre 2023 et 2025. Les attaquants placent des QR codes malveillants dans des emails, des flyers, des faux PV de stationnement, ou même en collant un autocollant par-dessus un vrai QR code (restaurants, bornes de parking...). Comme le lien est encodé dans une image, les filtres anti-spam classiques ne peuvent pas le détecter. De plus, le QR code ouvre directement le navigateur du smartphone, où il est plus difficile de vérifier l'URL complète sur un petit écran.",
-      "risks": [
-        "Redirection vers un site de phishing invisible pour les filtres",
-        "Difficulté à vérifier l'URL sur mobile (écran petit)",
-        "QR codes physiques collés sur de vrais supports (parkings, restaurants)"
+      "indicators": [
+        "Question theorique: analyser le contexte et lire l'explication pour retenir le bon reflexe."
       ],
-      "official_verification": "Utilisez un lecteur QR qui prévisualise l'URL avant d'ouvrir le lien",
-      "source_context": "Rapport Abnormal Security : hausse de 400% du quishing entre 2023 et 2025."
+      "explanation": "Le quishing (QR code + phishing) a augmenté de 400% entre 2023 et 2025. Les attaquants placent des QR codes malveillants dans des emails, des flyers, des faux PV de stationnement, ou même en collant un autocollant par-dessus un vrai QR code (restaurants, bornes de parking...). Comme le lien est encodé dans une image, les filtres anti-spam classiques ne peuvent pas le détecter. De plus, le QR code ouvre directement le navigateur du smartphone, où il est plus difficile de vérifier l'URL complète sur un petit écran.",
+      "source_context": "Rapport Abnormal Security : hausse de 400% du quishing entre 2023 et 2025.",
+      "verdict": null
     },
     {
       "id": 15,
@@ -782,7 +779,8 @@
       "difficulty": "debutant",
       "title": "Cliquer sans remplir : sans risque ?",
       "scenario": {
-        "description": "Affirmation à évaluer."
+        "description": "Affirmation à évaluer.",
+        "simulated_content": {}
       },
       "question": "VRAI ou FAUX : Cliquer sur un lien de phishing par SMS n'est pas dangereux tant qu'on ne remplit aucun formulaire sur la page.",
       "options": [
@@ -798,16 +796,12 @@
         }
       ],
       "correct_answer": "B",
-      "indicators": [],
-      "explanation": "Même sans remplir de formulaire, cliquer sur un lien de phishing comporte des risques réels. Premièrement, le clic confirme aux escrocs que votre numéro de téléphone est actif et que vous êtes réceptif — vous recevrez davantage de spam et de tentatives. Deuxièmement, sur Android en particulier, certaines pages peuvent tenter d'installer un logiciel malveillant (drive-by download). Troisièmement, des scripts sur la page peuvent collecter des informations sur votre appareil (fingerprinting). Le réflexe : ne jamais cliquer, même par curiosité.",
-      "risks": [
-        "Confirmation que votre numéro est actif → plus de spam",
-        "Tentative d'installation de malware (surtout Android)",
-        "Collecte d'empreinte numérique de votre appareil",
-        "Redirection vers d'autres sites malveillants en chaîne"
+      "indicators": [
+        "Question theorique: analyser le contexte et lire l'explication pour retenir le bon reflexe."
       ],
-      "official_verification": "",
-      "source_context": "Recommandations Cybermalveillance.gouv.fr et ANSSI."
+      "explanation": "Même sans remplir de formulaire, cliquer sur un lien de phishing comporte des risques réels. Premièrement, le clic confirme aux escrocs que votre numéro de téléphone est actif et que vous êtes réceptif — vous recevrez davantage de spam et de tentatives. Deuxièmement, sur Android en particulier, certaines pages peuvent tenter d'installer un logiciel malveillant (drive-by download). Troisièmement, des scripts sur la page peuvent collecter des informations sur votre appareil (fingerprinting). Le réflexe : ne jamais cliquer, même par curiosité.",
+      "source_context": "Recommandations Cybermalveillance.gouv.fr et ANSSI.",
+      "verdict": null
     },
     {
       "id": 17,
@@ -907,7 +901,8 @@
         "Vol de session et d'identifiants stockés dans le navigateur"
       ],
       "official_verification": "Vérifiez sur laposte.fr avec votre numéro de suivi. Les avis de passage sont en papier.",
-      "source_context": "Alerte captaindns.com : fichiers .svg et .pdf malveillants en forte hausse depuis 2025."
+      "source_context": "Alerte captaindns.com : fichiers .svg et .pdf malveillants en forte hausse depuis 2025.",
+      "pairs_with": 25
     },
     {
       "id": 19,
@@ -917,7 +912,8 @@
       "difficulty": "debutant",
       "title": "Que faire en cas de clic accidentel ?",
       "scenario": {
-        "description": "Question pratique sur les réflexes à adopter."
+        "description": "Question pratique sur les réflexes à adopter.",
+        "simulated_content": {}
       },
       "question": "Vous avez cliqué sur un lien de phishing et saisi vos identifiants bancaires avant de réaliser l'arnaque. Quelle est la PREMIÈRE chose à faire ?",
       "options": [
@@ -943,15 +939,12 @@
         }
       ],
       "correct_answer": "A",
-      "indicators": [],
-      "explanation": "L'ordre des actions est crucial :\n1. IMMÉDIATEMENT : Faire opposition sur votre carte bancaire (service interbancaire 24h/24 : 0 892 705 705, ou via l'app de votre banque)\n2. RAPIDEMENT : Changer vos mots de passe (le site compromis + tous les sites où vous utilisiez le même mot de passe)\n3. DANS LES HEURES SUIVANTES : Surveiller vos comptes bancaires pour détecter toute opération suspecte\n4. DANS LES JOURS SUIVANTS : Signaler sur 33700 (SMS), Signal-Spam (email), Pharos. Déposer plainte.\n5. EN CONTINU : Surveiller toute utilisation frauduleuse de votre identité\n\nChaque minute compte pour l'opposition bancaire car les virements frauduleux sont souvent instantanés.",
-      "risks": [
-        "Prélèvements en cours pendant que vous hésitez",
-        "Les fonds sont irrécupérables une fois transférés à l'étranger",
-        "Votre banque pourrait invoquer un retard comme 'négligence grave'"
+      "indicators": [
+        "Question theorique: analyser le contexte et lire l'explication pour retenir le bon reflexe."
       ],
-      "official_verification": "Opposition carte : 0 892 705 705 (24h/24). Plateforme Info Escroqueries : 0 805 805 817. Site : 17Cyber.gouv.fr",
-      "source_context": "Procédures recommandées par Cybermalveillance.gouv.fr."
+      "explanation": "L'ordre des actions est crucial :\n1. IMMÉDIATEMENT : Faire opposition sur votre carte bancaire (service interbancaire 24h/24 : 0 892 705 705, ou via l'app de votre banque)\n2. RAPIDEMENT : Changer vos mots de passe (le site compromis + tous les sites où vous utilisiez le même mot de passe)\n3. DANS LES HEURES SUIVANTES : Surveiller vos comptes bancaires pour détecter toute opération suspecte\n4. DANS LES JOURS SUIVANTS : Signaler sur 33700 (SMS), Signal-Spam (email), Pharos. Déposer plainte.\n5. EN CONTINU : Surveiller toute utilisation frauduleuse de votre identité\n\nChaque minute compte pour l'opposition bancaire car les virements frauduleux sont souvent instantanés.",
+      "source_context": "Procédures recommandées par Cybermalveillance.gouv.fr.",
+      "verdict": null
     },
     {
       "id": 20,
@@ -1002,7 +995,8 @@
         "Souscription frauduleuse de services/forfaits"
       ],
       "official_verification": "Connectez-vous sur orange.fr ou l'app Orange et mes Comptes. Appelez le 3900.",
-      "source_context": "Les opérateurs télécom figurent parmi les marques les plus usurpées dans les campagnes de phishing en France."
+      "source_context": "Les opérateurs télécom figurent parmi les marques les plus usurpées dans les campagnes de phishing en France.",
+      "pairs_with": 27
     },
     {
       "id": 21,
