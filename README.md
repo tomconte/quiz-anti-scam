@@ -38,11 +38,17 @@ Email, SMS, WhatsApp, appels téléphoniques, QR codes, courriers
 
 ## Phases du projet
 
-1. **Phase actuelle : création des données**
-   - Base de questions JSON (`data/scam-quiz-database.json`)
-   - Illustrations générées par IA pour chaque question
-2. **Phase suivante : implémentation de l'application**
-   - Stack à définir
+1. **Phase 1 (terminée) : socle de contenu**
+   - Base unifiée de 30 questions (`data/scam-quiz-database.json`)
+   - Illustrations IA générées pour chaque question (`data/quiz_images/`)
+2. **Phase 2 (état actuel) : premier prototype fonctionnel**
+   - Application web interactive en place (accueil, quiz, correction, résultats)
+   - Intégration des données + images dans l'expérience utilisateur
+   - Premiers tests automatisés (unitaires + e2e Playwright)
+3. **Phase 3 (prochaine étape) : consolidation**
+   - Itérations UX/mobile et accessibilité
+   - Renforcement QA (cas limites, non-régression)
+   - Préparation à une version bêta partageable
 
 ## QA mobile (captures full-page)
 
