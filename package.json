@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:mobile-shots": "playwright test tests/e2e/mobile-fullpage-screenshots.spec.ts --project=chromium"
   },
   "dependencies": {
     "react": "^18.3.1",

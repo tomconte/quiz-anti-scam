@@ -43,3 +43,28 @@ Email, SMS, WhatsApp, appels téléphoniques, QR codes, courriers
    - Illustrations générées par IA pour chaque question
 2. **Phase suivante : implémentation de l'application**
    - Stack à définir
+
+## QA mobile (captures full-page)
+
+Pour vérifier le rendu mobile après sélection d'une réponse (dont l'overlay des indicateurs sur l'image), un test Playwright dédié est disponible.
+
+Commande par défaut (4 premières questions):
+
+```bash
+npm run test:e2e:mobile-shots
+```
+
+Le test:
+- ouvre l'app en viewport `iPhone 13`
+- clique sur `Explorer toutes les questions`
+- sélectionne la première réponse de chaque question
+- capture l'état final en **full-page**
+
+Sortie par défaut:
+- `output/playwright/mobile-fullpage/q01-after-answer.png` etc.
+
+Variables optionnelles:
+
+```bash
+SCREENSHOT_QUESTION_COUNT=6 SCREENSHOT_OUTPUT_DIR=output/playwright/mobile-v2 npm run test:e2e:mobile-shots
+```
